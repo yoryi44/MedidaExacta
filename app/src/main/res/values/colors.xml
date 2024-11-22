@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_wood">#E8D8A6</color> <!-- Madera clara (pino o abeto) -->
+    <color name="dark_walnut">#6E4B3A</color> <!-- Madera oscura (nogal o roble) -->
+    <color name="aged_oak">#C2A88D</color> <!-- Madera envejecida (roble tratado) -->
+    <color name="stone_grey">#A8A8A8</color> <!-- Gris suave (cemento o herramientas metálicas) -->
+    <color name="charcoal">#444444</color> <!-- Gris oscuro (para contraste suave) -->
+    <color name="copper_accent">#B56E39</color> <!-- Cobre (detalles metálicos) -->
+    <color name="leaf_green">#6E7F3D</color> <!-- Verde hoja (detalles naturales) -->
+    <color name="soft_cream">#F9F4E7</color> <!-- Crema suave (fondo cálido) -->
+    <color name="wooden_black">#3D2F2A</color> <!-- Negro suave con matices marrones (detalles) -->
+</resources>
