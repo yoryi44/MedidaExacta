@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.jorgemeza.medidaexacta.navigation.Client
+import com.jorgemeza.medidaexacta.navigation.Menu
 import com.jorgemeza.medidaexacta.navigation.NavigationHost
 import com.jorgemeza.medidaexacta.ui.theme.MedidaExactaTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +51,7 @@ class MainActivity : ComponentActivity() {
 //
 //        return Onboarding
 
-        return Client
+        return Menu
     }
 
 }

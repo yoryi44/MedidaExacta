@@ -18,13 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jorgemeza.medidaexacta.core.ui.TopBarComponent
 import com.jorgemeza.medidaexacta.Client.ui.components.ClientItemComponent
-import com.jorgemeza.medidaexacta.ui.theme.Coffee40
-import com.jorgemeza.medidaexacta.ui.theme.Coffee80
+import com.jorgemeza.medidaexacta.core.ui.TopBarComponent
 import com.jorgemeza.medidaexacta.ui.theme.CoffeeYellow40
 import com.jorgemeza.medidaexacta.ui.theme.CoffeeYellow80
-import com.jorgemeza.medidaexacta.ui.theme.Warning
 
 @Composable
 fun ClientScreen(

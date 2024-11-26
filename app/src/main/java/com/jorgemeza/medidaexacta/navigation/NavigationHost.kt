@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.jorgemeza.medidaexacta.Client.ui.ClientScreen
+import com.jorgemeza.medidaexacta.menu.ui.MenuScreeen
 
 @Composable
 fun NavigationHost(
@@ -13,9 +14,17 @@ fun NavigationHost(
 ) {
     NavHost(navController = navHostController, startDestination = startDestination) {
 
-        //ONBOARDING
+        //Client
         composable<Client> {
             ClientScreen()
         }
+
+        //Menu
+        composable<Menu> {
+            MenuScreeen() {
+                navHostController.navigate(it)
+            }
+        }
+
     }
 }
