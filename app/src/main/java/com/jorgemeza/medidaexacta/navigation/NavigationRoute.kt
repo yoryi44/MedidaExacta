@@ -7,3 +7,6 @@ object Client
 
 @Serializable
 object Menu
+
+@Serializable
+object Quotation
