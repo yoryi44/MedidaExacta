@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "983790884060",
+    "firebase_url": "https://my-appstore-apps-default-rtdb.firebaseio.com",
+    "project_id": "my-appstore-apps",
+    "storage_bucket": "my-appstore-apps.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983790884060:android:9161b365683ff07df99019",
+        "android_client_info": {
+          "package_name": "com.example.paymentreminder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbfodQa3OIus43MSiA7_S0JSBAVREzhy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983790884060:android:6cc762cc3d06b5b0f99019",
+        "android_client_info": {
+          "package_name": "com.jorgemeza.medidaexacta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbfodQa3OIus43MSiA7_S0JSBAVREzhy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

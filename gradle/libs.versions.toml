@@ -21,6 +21,9 @@ hiltNavigationVersion = "1.2.0"
 hiltAndroidCompiler = "2.50"
 hiltCompiler = "1.2.0"
 protoliteWellKnownTypesVersion = "18.0.0"
+firebaseCrashlytics = "19.2.1"
+googleGmsGoogleServices = "4.4.2"
+googleFirebaseCrashlytics = "3.0.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +51,7 @@ protolite-well-known-types = { group = "com.google.firebase", name = "protolite-
 #NAVVIGATION  COMPOSE (NAV HOST)
 nav-host = { module = "androidx.navigation:navigation-compose",version.ref = "nav_version" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -58,4 +62,6 @@ daggerHiltPlugin = { id = "com.google.dagger.hilt.android", version.ref = "hiltA
 kspPlugin = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvmVersion" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
 

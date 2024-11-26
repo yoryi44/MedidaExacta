@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.jorgemeza.medidaexacta.Client.ui.ClientScreen
+import com.jorgemeza.medidaexacta.invoice.ui.InvoiceScreen
 import com.jorgemeza.medidaexacta.menu.ui.MenuScreeen
 import com.jorgemeza.medidaexacta.quotation.ui.QuotationScreen
 
@@ -30,6 +31,11 @@ fun NavigationHost(
         //Quotation
         composable<Quotation> {
             QuotationScreen()
+        }
+
+        //Invoice
+        composable<Invoice> {
+            InvoiceScreen()
         }
 
     }

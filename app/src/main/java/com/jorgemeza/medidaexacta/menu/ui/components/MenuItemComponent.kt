@@ -25,6 +25,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jorgemeza.medidaexacta.ui.theme.Coffee40
+import com.jorgemeza.medidaexacta.ui.theme.CoffeeYellow40
+import com.jorgemeza.medidaexacta.ui.theme.CoffeeYellow80
 
 @Composable
 fun MenuItemComponent(
@@ -48,12 +50,12 @@ fun MenuItemComponent(
                 .clickable { onItemSelect(item) },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Icon(icon, contentDescription = "", modifier = modifier.size(100.dp))
+            Icon(icon, contentDescription = "", modifier = modifier.size(100.dp), tint = Coffee40.copy(alpha = 0.7f))
             Spacer(Modifier.weight(1f))
             Text(
                 modifier = modifier
                     .fillMaxWidth()
-                    .background(Coffee40.copy(alpha = 0.7f)),
+                    .background(CoffeeYellow40.copy(alpha = 0.8f)),
                 textAlign = TextAlign.Center,
                 text = item,
                 color = Color.White
