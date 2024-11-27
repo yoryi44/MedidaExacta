@@ -1,11 +1,8 @@
 package com.jorgemeza.medidaexacta.menu.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -23,7 +20,7 @@ import com.jorgemeza.medidaexacta.menu.ui.models.MenuItem
 import com.jorgemeza.medidaexacta.navigation.Client
 import com.jorgemeza.medidaexacta.navigation.Invoice
 import com.jorgemeza.medidaexacta.navigation.Quotation
-import com.jorgemeza.medidaexacta.ui.theme.CoffeeYellow80
+import com.jorgemeza.medidaexacta.ui.theme.WarmGray
 
 @Composable
 fun MenuScreeen(
@@ -42,7 +39,7 @@ fun MenuScreeen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(CoffeeYellow80.copy(alpha = 0.5f))
+            .background(WarmGray.copy(alpha = 0.5f))
             .padding(16.dp),
     ) {
 

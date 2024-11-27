@@ -18,10 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jorgemeza.medidaexacta.core.ui.FloatingActionButtonComponent
 import com.jorgemeza.medidaexacta.core.ui.TopBarComponent
 import com.jorgemeza.medidaexacta.invoice.ui.components.InvoiceItemComponent
-import com.jorgemeza.medidaexacta.ui.theme.CoffeeYellow40
-import com.jorgemeza.medidaexacta.ui.theme.CoffeeYellow80
+import com.jorgemeza.medidaexacta.ui.theme.SoftGray
+import com.jorgemeza.medidaexacta.ui.theme.WarmGray
 
 @Composable
 fun InvoiceScreen(
@@ -34,21 +35,11 @@ fun InvoiceScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = {},
-                containerColor = CoffeeYellow40,
-                shape = CircleShape
-            ) {
-                Icon(
-                    Icons.Outlined.Add,
-                    contentDescription = "add new payment reminder",
-                    tint = Color.White
-                )
-            }
+            FloatingActionButtonComponent()
         }
     ) { innerPading ->
         Column(modifier = Modifier.padding().fillMaxSize()
-            .background(CoffeeYellow80.copy(alpha = 0.5f))
+            .background(WarmGray.copy(alpha = 0.5f))
             .fillMaxSize()) {
             TopBarComponent(value = state.searchQuery)
             {

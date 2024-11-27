@@ -3,14 +3,14 @@ package com.jorgemeza.medidaexacta.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // Tonos claros (80)
-val Coffee80 = Color(0xFFD7C29F)       // Beige claro
-val CoffeeGrey80 = Color(0xFFC5B8A5)   // Gris beige suave
-val CoffeeYellow80 = Color(0xFFE8D5A2) // Amarillo cálido claro
+val LightGray = Color(0xFFCCCCCC)       // Gris claro
+val NeutralGray = Color(0xFFB3B3B3)   // Gris neutro suave
+val WarmGray = Color(0xFFE6E6E6) // Gris cálido claro
 
 // Tonos oscuros (40)
-val Coffee40 = Color(0xFF6F4F1A)       // Café oscuro
-val CoffeeGrey40 = Color(0xFF7A6855)   // Gris cálido oscuro
-val CoffeeYellow40 = Color(0xFF9B7E3A) // Amarillo cálido oscuro
+val DarkGray = Color(0xFF333333)       // Gris oscuro (casi negro)
+val MediumGray = Color(0xFF4D4D4D)   // Gris oscuro medio
+val SoftGray = Color(0xFF666666) // Gris oscuro cálido
 
 val Success = Color(0xff28a745)
 val Warning = Color(0xffffc107)

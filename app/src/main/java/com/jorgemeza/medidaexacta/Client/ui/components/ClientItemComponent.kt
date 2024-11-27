@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.jorgemeza.medidaexacta.ui.theme.CoffeeGrey40
+import com.jorgemeza.medidaexacta.ui.theme.MediumGray
 
 @Composable
 fun ClientItemComponent(
@@ -42,7 +42,7 @@ fun ClientItemComponent(
                 Icons.Default.AccountCircle,
                 contentDescription = "",
                 Modifier.size(80.dp),
-                tint = CoffeeGrey40
+                tint = Color.Black
             )
             Text(text = text, modifier = Modifier.padding(horizontal = 10.dp), color = Color.Black)
         }

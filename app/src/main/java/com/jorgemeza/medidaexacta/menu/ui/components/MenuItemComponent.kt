@@ -2,7 +2,6 @@ package com.jorgemeza.medidaexacta.menu.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -24,9 +22,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.jorgemeza.medidaexacta.ui.theme.Coffee40
-import com.jorgemeza.medidaexacta.ui.theme.CoffeeYellow40
-import com.jorgemeza.medidaexacta.ui.theme.CoffeeYellow80
+import com.jorgemeza.medidaexacta.ui.theme.DarkGray
+import com.jorgemeza.medidaexacta.ui.theme.SoftGray
 
 @Composable
 fun MenuItemComponent(
@@ -50,12 +47,12 @@ fun MenuItemComponent(
                 .clickable { onItemSelect(item) },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Icon(icon, contentDescription = "", modifier = modifier.size(100.dp), tint = Coffee40.copy(alpha = 0.7f))
+            Icon(icon, contentDescription = "", modifier = modifier.size(100.dp), tint = Color.Black)
             Spacer(Modifier.weight(1f))
             Text(
                 modifier = modifier
                     .fillMaxWidth()
-                    .background(CoffeeYellow40.copy(alpha = 0.8f)),
+                    .background(Color.Black),
                 textAlign = TextAlign.Center,
                 text = item,
                 color = Color.White

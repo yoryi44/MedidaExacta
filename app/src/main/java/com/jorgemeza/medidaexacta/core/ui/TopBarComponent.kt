@@ -11,8 +11,10 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.jorgemeza.medidaexacta.ui.theme.Coffee80
+import com.jorgemeza.medidaexacta.ui.theme.LightGray
+import com.jorgemeza.medidaexacta.ui.theme.SoftGray
 
 @Composable
 fun TopBarComponent(
@@ -24,8 +26,9 @@ fun TopBarComponent(
         modifier = modifier
             .fillMaxWidth()
             .height(80.dp)
-            .background(Coffee80.copy(alpha = 0.4f)),
-        horizontalArrangement = Arrangement.Center
+            .background(Color.Black),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         TextFieldComponent(
             value = value,

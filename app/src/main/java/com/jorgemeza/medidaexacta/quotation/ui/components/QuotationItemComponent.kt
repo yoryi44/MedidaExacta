@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
@@ -16,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.jorgemeza.medidaexacta.ui.theme.CoffeeGrey40
+import com.jorgemeza.medidaexacta.ui.theme.MediumGray
 
 @Composable
 fun QuotationItemComponent(
@@ -43,7 +42,7 @@ fun QuotationItemComponent(
                 Icons.Default.DateRange,
                 contentDescription = "",
                 Modifier.size(80.dp),
-                tint = CoffeeGrey40
+                tint = Color.Black
             )
             Text(text = text, modifier = Modifier.padding(horizontal = 10.dp), color = Color.Black)
         }
