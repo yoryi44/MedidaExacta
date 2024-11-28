@@ -1,5 +1,6 @@
-package com.jorgemeza.medidaexacta.Client.ui.components
+package com.jorgemeza.medidaexacta.Client.list.ui.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,13 +15,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.jorgemeza.medidaexacta.Client.list.ui.models.ClientModel
 import com.jorgemeza.medidaexacta.ui.theme.MediumGray
 
 @Composable
 fun ClientItemComponent(
     modifier: Modifier = Modifier,
-    text: String
+    client: ClientModel
 ) {
 
     Card(
@@ -35,16 +39,40 @@ fun ClientItemComponent(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .height(100.dp)
+                .height(120.dp)
                 .padding(5.dp)
         ) {
+
             Icon(
                 Icons.Default.AccountCircle,
                 contentDescription = "",
                 Modifier.size(80.dp),
                 tint = Color.Black
             )
-            Text(text = text, modifier = Modifier.padding(horizontal = 10.dp), color = Color.Black)
+
+            Column {
+                Text(
+                    text = client.name,
+                    modifier = Modifier.padding(horizontal = 10.dp),
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold,
+                )
+                Text(
+                    text = client.address,
+                    modifier = Modifier.padding(horizontal = 10.dp),
+                    color = Color.Black,
+                )
+                Text(
+                    text = client.phone,
+                    modifier = Modifier.padding(horizontal = 10.dp),
+                    color = Color.Black,
+                )
+                Text(
+                    text = client.email.orEmpty(),
+                    modifier = Modifier.padding(horizontal = 10.dp),
+                    color = Color.Black,
+                )
+            }
         }
     }
 

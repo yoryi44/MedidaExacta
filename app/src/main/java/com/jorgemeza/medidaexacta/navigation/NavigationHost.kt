@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.jorgemeza.medidaexacta.Client.ui.ClientScreen
+import com.jorgemeza.medidaexacta.Client.list.ui.ClientScreen
 import com.jorgemeza.medidaexacta.invoice.ui.InvoiceScreen
 import com.jorgemeza.medidaexacta.menu.ui.MenuScreeen
 import com.jorgemeza.medidaexacta.quotation.ui.QuotationScreen

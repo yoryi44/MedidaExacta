@@ -1,4 +1,4 @@
-package com.jorgemeza.medidaexacta.Client.ui
+package com.jorgemeza.medidaexacta.Client.list.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jorgemeza.medidaexacta.Client.ui.components.ClientItemComponent
+import com.jorgemeza.medidaexacta.Client.list.ui.components.ClientItemComponent
 import com.jorgemeza.medidaexacta.core.ui.FloatingActionButtonComponent
 import com.jorgemeza.medidaexacta.core.ui.TopBarComponent
 import com.jorgemeza.medidaexacta.ui.theme.SoftGray
@@ -30,8 +30,6 @@ fun ClientScreen(
 ) {
 
     val state = clientViewModel.state
-
-    val items = List(10) { "Elemento #$it" }
 
     Scaffold(
         floatingActionButton = {
@@ -49,8 +47,8 @@ fun ClientScreen(
                 modifier = Modifier.weight(1f),
                 contentPadding = PaddingValues(16.dp)
             ) {
-                items(items) { item ->
-                    ClientItemComponent(text = item)
+                items(state.clients) { item ->
+                    ClientItemComponent(client = item)
                 }
             }
         }

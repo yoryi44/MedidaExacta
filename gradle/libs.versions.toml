@@ -11,6 +11,12 @@ composeBom = "2024.11.00"
 kspVersion = "2.0.0-1.0.22"
 jetbrainsKotlinJvmVersion = "1.9.23"
 
+#RETROFIT
+retrofit = "2.9.0"
+
+#INTERCEPTOR
+okhttp3 = "5.0.0-alpha.10"
+
 #NAVHOST
 nav_version = "2.8.4"
 kotlinxSerialization = "1.6.3"
@@ -41,6 +47,13 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+#RETROFIT
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+
+#INTERCEPTOR
+logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3" }
+
 #DAGGER HILT
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid"}
 hilt-compiler = { module = "androidx.hilt:hilt-compiler",version.ref = "hiltCompiler" }
@@ -48,7 +61,7 @@ hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationVersion"}
 protolite-well-known-types = { group = "com.google.firebase", name = "protolite-well-known-types", version.ref = "protoliteWellKnownTypesVersion" }
 
-#NAVVIGATION  COMPOSE (NAV HOST)
+#NAVIGATION  COMPOSE (NAV HOST)
 nav-host = { module = "androidx.navigation:navigation-compose",version.ref = "nav_version" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }

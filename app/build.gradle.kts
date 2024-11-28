@@ -76,4 +76,11 @@ dependencies {
     ksp(libs.hilt.android.compiler)
     ksp(libs.hilt.compiler)
 
+    //RETROFIT
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+
+    //INTERCEPTOR
+    implementation(libs.logging.interceptor)
+
 }
