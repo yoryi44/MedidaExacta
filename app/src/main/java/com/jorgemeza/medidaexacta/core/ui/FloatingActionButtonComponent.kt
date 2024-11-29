@@ -12,10 +12,11 @@ import com.jorgemeza.medidaexacta.ui.theme.DarkGray
 
 @Composable
 fun FloatingActionButtonComponent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
     FloatingActionButton(
-        onClick = {},
+        onClick = { onClick() },
         containerColor = Color.Black,
         shape = CircleShape
     ) {

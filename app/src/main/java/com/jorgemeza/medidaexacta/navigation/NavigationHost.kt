@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.jorgemeza.medidaexacta.Client.list.ui.ClientScreen
+import androidx.navigation.toRoute
+import com.jorgemeza.medidaexacta.client.ui.detail.ClientDetailScreen
+import com.jorgemeza.medidaexacta.client.ui.list.ClientScreen
 import com.jorgemeza.medidaexacta.invoice.ui.InvoiceScreen
 import com.jorgemeza.medidaexacta.menu.ui.MenuScreeen
 import com.jorgemeza.medidaexacta.quotation.ui.QuotationScreen
@@ -25,7 +27,9 @@ fun NavigationHost(
 
         //Client
         composable<Client> {
-            ClientScreen()
+            ClientScreen() {
+                navHostController.navigate(ClientDetail(clientId = it))
+            }
         }
 
         //Quotation
@@ -36,6 +40,14 @@ fun NavigationHost(
         //Invoice
         composable<Invoice> {
             InvoiceScreen()
+        }
+
+        //Detail
+        composable<ClientDetail> {
+            val detail = it.toRoute<ClientDetail>()
+            ClientDetailScreen(detail.clientId) {
+                navHostController.popBackStack()
+            }
         }
 
     }

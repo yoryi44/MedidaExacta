@@ -35,16 +35,23 @@ fun InvoiceScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButtonComponent()
+            FloatingActionButtonComponent() {
+
+            }
         }
     ) { innerPading ->
         Column(modifier = Modifier.padding().fillMaxSize()
             .background(WarmGray.copy(alpha = 0.5f))
             .fillMaxSize()) {
-            TopBarComponent(value = state.searchQuery)
-            {
-                invoiceViewModel.onEvent(InvoiceEvent.OnSearchQueryChange(it))
-            }
+            TopBarComponent(value = state.searchQuery,
+                onChange = {
+                    invoiceViewModel.onEvent(InvoiceEvent.OnSearchQueryChange(it))
+                },
+                onSearch = {
+
+                }
+            )
+
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(16.dp)

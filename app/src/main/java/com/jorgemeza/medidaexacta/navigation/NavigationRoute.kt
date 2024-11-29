@@ -13,3 +13,6 @@ object Quotation
 
 @Serializable
 object Invoice
+
+@Serializable
+data class ClientDetail(val clientId: String?)

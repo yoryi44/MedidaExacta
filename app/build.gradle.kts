@@ -83,4 +83,13 @@ dependencies {
     //INTERCEPTOR
     implementation(libs.logging.interceptor)
 
+    //ROOM
+    implementation(libs.room.ktx)
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+
+    //WORK MANAGER
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+
 }

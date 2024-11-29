@@ -6,4 +6,6 @@ object Api {
 
     const val CLIENT_URL = "clients.json"
 
+    const val CLIENT_DELETE_URL = "clients/{clientId}.json"
+
 }

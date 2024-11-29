@@ -20,13 +20,13 @@ private val LightColorScheme = lightColorScheme(
     primary = LightGray,       // Beige claro para elementos principales
     secondary = NeutralGray, // Gris beige suave para áreas secundarias
     tertiary = WarmGray, // Amarillo cálido claro como acento
-    background = Color(0xFFD7C29F),  // Beige cálido claro (nuevo color de fondo)
-    surface = Color(0xFFE8D5A2),     // Beige más claro para superficies
-    onPrimary = Color(0xFF3D2F2A),   // Negro suave con matices marrones para texto sobre fondo principal
-    onSecondary = Color(0xFF3D2F2A), // Negro suave con matices marrones para texto en áreas secundarias
-    onTertiary = Color(0xFF3D2F2A),  // Negro suave con matices marrones para texto en acentos
-    onBackground = MediumGray,     // Gris cálido oscuro para contraste en fondo claro
-    onSurface = MediumGray         // Gris cálido oscuro para texto en superficies
+    background = Color.Black,  // Beige cálido claro convertido a gris más oscuro
+    surface = Color(0xC5C5C5),     // Beige más claro convertido a gris oscuro
+    onPrimary = Color(0x1A1A1A),   // Negro suave con matices marrones convertido a un gris casi negro
+    onSecondary = Color(0x1A1A1A), // Negro suave con matices marrones convertido a un gris casi negro
+    onTertiary = Color(0x1A1A1A),  // Negro suave con matices marrones convertido a un gris casi negro
+    onBackground = Color(0x333333), // Gris cálido oscuro convertido a gris más cercano al negro
+    onSurface = Color(0x333333)    // Gris cálido oscuro convertido a gris más cercano al negro
 )
 
 @Composable

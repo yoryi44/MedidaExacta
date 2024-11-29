@@ -35,16 +35,23 @@ fun QuotationScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButtonComponent()
+            FloatingActionButtonComponent() {
+
+            }
         }
     ) { innerPading ->
         Column(modifier = Modifier.padding().fillMaxSize()
             .background(WarmGray.copy(alpha = 0.5f))
             .fillMaxSize()) {
-            TopBarComponent(value = state.searchQuery)
-            {
-                quotationViewModel.onEvent(QuotationEvent.OnSearchQueryChange(it))
-            }
+            TopBarComponent(value = state.searchQuery,
+                onChange = {
+                    quotationViewModel.onEvent(QuotationEvent.OnSearchQueryChange(it))
+                },
+                onSearch = {
+
+                }
+            )
+
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(16.dp)
