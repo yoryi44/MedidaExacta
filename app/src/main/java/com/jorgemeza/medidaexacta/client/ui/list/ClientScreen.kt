@@ -53,11 +53,27 @@ fun ClientScreen(
                         icon = Icons.Default.Warning,
                         title = "Are you sure you want to delete the client?",
                         message = "Once deleted, you will not be able to recover the information.",
+                        iconColor = com.jorgemeza.medidaexacta.ui.theme.Warning,
                         onDismiss = {
                             clientViewModel.onEvent(ClientEvent.OnDismissDialog)
                         },
                         onConfirm = {
                             clientViewModel.onEvent(ClientEvent.OnConfirmDialog)
+                        }
+                    )
+                }
+
+                if(!state.error.isNullOrBlank()) {
+                    AlertDialogComponent(
+                        icon = Icons.Default.Warning,
+                        title = "Error",
+                        message = state.error,
+                        iconColor = com.jorgemeza.medidaexacta.ui.theme.Danger,
+                        onDismiss = {
+                            clientViewModel.onEvent(ClientEvent.OnDismissDialog)
+                        },
+                        onConfirm = {
+                            clientViewModel.onEvent(ClientEvent.OnDismissDialog)
                         }
                     )
                 }

@@ -31,6 +31,7 @@ class ClientViewModel @Inject constructor(
 
     init {
         getAllClient()
+
         viewModelScope.launch{
             syncClientUseCase()
         }
@@ -42,13 +43,13 @@ class ClientViewModel @Inject constructor(
                 state = state.copy(searchQuery = event.query)
             }
             ClientEvent.OnConfirmDialog -> {
-                viewModelScope.launch {
-                    deleteClientUseCase(state.idClientDelete!!)
-                    state = state.copy(idClientDelete = null)
-                }
+                deleteClient()
             }
             ClientEvent.OnDismissDialog -> {
-                state = state.copy(idClientDelete = null)
+                state = state.copy(
+                    idClientDelete = null,
+                    error = null,
+                )
             }
 
             is ClientEvent.OnDeleteClient -> {
@@ -62,6 +63,18 @@ class ClientViewModel @Inject constructor(
                     )
                 }
             }
+        }
+    }
+
+    private fun deleteClient() {
+        viewModelScope.launch {
+            deleteClientUseCase(state.idClientDelete!!).onFailure {
+                state = state.copy(
+                    error = it.message,
+                    idClientDelete = null,
+                )
+            }
+            state = state.copy(idClientDelete = null)
         }
     }
 

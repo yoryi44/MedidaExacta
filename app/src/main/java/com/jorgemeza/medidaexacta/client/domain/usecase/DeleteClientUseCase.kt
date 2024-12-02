@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 class DeleteClientUseCase(
     private val clientRepository: IClientRepository
 ) {
-    suspend operator fun invoke(clientId: String) = withContext(Dispatchers.IO) {
+    suspend operator fun invoke(clientId: String) : Result<Unit> = withContext(Dispatchers.IO) {
         clientRepository.deleteClient(clientId)
     }
 }

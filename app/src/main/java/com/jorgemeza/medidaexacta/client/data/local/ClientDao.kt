@@ -39,6 +39,6 @@ interface ClientDao {
     fun getAllClientSync(): List<ClientSyncEntity>
 
     @Delete
-    suspend fun deleteHabitSync(clientSyncEntity: ClientSyncEntity)
+    suspend fun deleteClientSync(clientSyncEntity: ClientSyncEntity)
 
 }

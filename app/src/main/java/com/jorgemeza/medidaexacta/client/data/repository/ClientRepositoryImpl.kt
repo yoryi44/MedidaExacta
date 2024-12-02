@@ -1,5 +1,6 @@
 package com.jorgemeza.medidaexacta.client.data.repository
 
+import androidx.room.Transaction
 import androidx.work.BackoffPolicy
 import androidx.work.Constraints
 import androidx.work.ExistingWorkPolicy
@@ -8,6 +9,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.home_data.remote.util.resultOf
 import com.jorgemeza.medidaexacta.client.data.local.ClientDao
+import com.jorgemeza.medidaexacta.client.data.local.entity.ClientSyncEntity
 import com.jorgemeza.medidaexacta.client.data.mapper.toDomain
 import com.jorgemeza.medidaexacta.client.data.mapper.toDto
 import com.jorgemeza.medidaexacta.client.data.mapper.toEntity
@@ -57,15 +59,14 @@ class ClientRepositoryImpl(
         }
     }
 
-    override suspend fun deleteClient(id: String) {
-        resultOf {
+    @Transaction
+    override suspend fun deleteClient(id: String): Result<Unit> {
+        return resultOf {
+            clientApi.deleteClientById(id)
+        }.onSuccess {
             clientDao.deleteClientById(id)
             clientDao.deleteClientSyncById(id)
-            clientApi.deleteClientById(id)
-        }.onFailure {
-            val x = null
-        }.onSuccess {
-            val x = null
+            Result.success(Unit)
         }
     }
 

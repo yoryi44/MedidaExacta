@@ -9,7 +9,7 @@ interface IClientRepository {
     suspend fun getClientById(id: String): ClientModel
     suspend fun getClientBySearch(search: String): List<ClientModel>
     suspend fun addClient(client: ClientModel)
-    suspend fun deleteClient(id: String)
+    suspend fun deleteClient(id: String): Result<Unit>
     suspend fun syncClient()
 
 }

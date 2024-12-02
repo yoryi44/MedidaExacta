@@ -1,6 +1,7 @@
 package com.jorgemeza.medidaexacta.client.data.sync
 
 import android.content.Context
+import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
@@ -35,8 +36,10 @@ class ClientSyncWorker @AssistedInject constructor(
                 val jobs = items.map { items -> async { sync(items) } }
                 jobs.awaitAll()
             }
+            Log.i("ClientSyncWorker", "Synchronization completed successfully.")
             Result.success()
         } catch (e: Exception) {
+            Log.i("ClientSyncWorker", "Error during synchronization: ${e.message}")
             Result.retry()
         }
     }
@@ -46,7 +49,7 @@ class ClientSyncWorker @AssistedInject constructor(
         resultOf {
             api.inserClient(client)
         }.onSuccess {
-            dao.deleteHabitSync(entity)
+            dao.deleteClientSync(entity)
         }.onFailure {
             throw it
         }
