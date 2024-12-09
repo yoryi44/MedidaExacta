@@ -15,4 +15,13 @@ object Quotation
 object Invoice
 
 @Serializable
-data class ClientDetail(val clientId: String?)
+data class ClientDetail(val id: String?)
+
+@Serializable
+data class QuotationDetail(val id: String?)
+
+@Serializable
+data class ShoppingCar(val id: String?)
+
+@Serializable
+data class ShoppingCarDetail(val id: String?)

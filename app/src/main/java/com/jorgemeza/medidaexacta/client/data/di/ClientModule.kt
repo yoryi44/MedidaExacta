@@ -98,5 +98,4 @@ object ClientModule {
         return WorkManager.getInstance(context)
     }
 
-
 }

@@ -5,7 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class ClientEntity(
-
     @PrimaryKey(autoGenerate = false)
     val id: String,
     val address: String,
@@ -14,5 +13,4 @@ data class ClientEntity(
     val phone: String,
     val cif: String?,
     val email: String?
-
 )

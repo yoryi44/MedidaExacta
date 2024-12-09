@@ -1,4 +1,4 @@
-package com.jorgemeza.medidaexacta.client.ui.list.models
+package com.jorgemeza.medidaexacta.client.domain.model
 
 data class ClientModel (
     val id : String,

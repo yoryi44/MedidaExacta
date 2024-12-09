@@ -4,7 +4,7 @@ import com.jorgemeza.medidaexacta.client.data.local.entity.ClientEntity
 import com.jorgemeza.medidaexacta.client.data.local.entity.ClientSyncEntity
 import com.jorgemeza.medidaexacta.client.data.remote.dto.ClientDto
 import com.jorgemeza.medidaexacta.client.data.remote.dto.ClientResponse
-import com.jorgemeza.medidaexacta.client.ui.list.models.ClientModel
+import com.jorgemeza.medidaexacta.client.domain.model.ClientModel
 
 fun ClientResponse.toDomain(): List<ClientModel> {
     return this.map {

@@ -1,6 +1,6 @@
 package com.jorgemeza.medidaexacta.client.ui.list
 
-import com.jorgemeza.medidaexacta.client.ui.list.models.ClientModel
+import com.jorgemeza.medidaexacta.client.domain.model.ClientModel
 
 data class ClientState(
     val searchQuery: String = "",

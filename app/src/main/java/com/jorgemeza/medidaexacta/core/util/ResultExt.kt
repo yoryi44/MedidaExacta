@@ -1,4 +1,4 @@
-package com.example.home_data.remote.util
+package com.jorgemeza.medidaexacta.core.util
 
 import kotlinx.coroutines.CancellationException
 

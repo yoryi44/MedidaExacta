@@ -8,7 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.jorgemeza.medidaexacta.ui.theme.DarkGray
+import com.jorgemeza.medidaexacta.ui.theme.Warning
 
 @Composable
 fun FloatingActionButtonComponent(
@@ -17,13 +17,13 @@ fun FloatingActionButtonComponent(
 ) {
     FloatingActionButton(
         onClick = { onClick() },
-        containerColor = Color.Black,
+        containerColor = Warning,
         shape = CircleShape
     ) {
         Icon(
             Icons.Outlined.Add,
             contentDescription = "add new payment reminder",
-            tint = Color.White
+            tint = Color.Black
         )
     }
 }

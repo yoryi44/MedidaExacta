@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.jorgemeza.medidaexacta.client.ui.list.models.ClientModel
+import com.jorgemeza.medidaexacta.client.domain.model.ClientModel
 
 @Composable
 fun ClientItemComponent(

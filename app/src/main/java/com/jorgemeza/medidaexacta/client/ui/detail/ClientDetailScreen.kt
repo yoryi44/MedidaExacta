@@ -9,7 +9,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -60,7 +64,7 @@ fun ClientDetailScreen(
         } else {
             TextFieldComponent(
                 value = state.name,
-                leadingIcon = Icons.Default.Edit,
+                leadingIcon = Icons.Default.AccountBox,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
@@ -81,7 +85,7 @@ fun ClientDetailScreen(
 
             TextFieldComponent(
                 value = state.address,
-                leadingIcon = Icons.Default.Edit,
+                leadingIcon = Icons.Default.Home,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
@@ -102,7 +106,7 @@ fun ClientDetailScreen(
 
             TextFieldComponent(
                 value = state.phone,
-                leadingIcon = Icons.Default.Edit,
+                leadingIcon = Icons.Default.Phone,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
@@ -123,7 +127,7 @@ fun ClientDetailScreen(
 
             TextFieldComponent(
                 value = state.email ?: "",
-                leadingIcon = Icons.Default.Edit,
+                leadingIcon = Icons.Default.Email,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
@@ -144,7 +148,7 @@ fun ClientDetailScreen(
 
             TextFieldComponent(
                 value = state.postalCode,
-                leadingIcon = Icons.Default.Edit,
+                leadingIcon = Icons.Default.Home,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),

@@ -27,7 +27,7 @@ interface ClientDao {
     fun getClientBySeacrh(search: String): List<ClientEntity>
 
     @Query("SELECT * FROM ClientEntity WHERE id = :id")
-    fun getClientById(id: String): ClientEntity
+    suspend fun getClientById(id: String): ClientEntity
 
     @Query("DELETE FROM ClientEntity WHERE id = :clientId")
     fun deleteClientById(clientId: String)

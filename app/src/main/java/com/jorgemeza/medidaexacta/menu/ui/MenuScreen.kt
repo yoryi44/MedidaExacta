@@ -36,7 +36,7 @@ fun MenuScreeen(
         MenuItem(item = "Facturas", icon = Icons.Default.ShoppingCart, navigate = Invoice),
     )
 
-    val state = menuViewModel.state
+    menuViewModel.state
 
     Column(
         modifier = Modifier

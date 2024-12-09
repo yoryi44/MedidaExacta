@@ -32,7 +32,7 @@ fun ClientScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButtonComponent() {
+            FloatingActionButtonComponent {
                 onDetail(null)
             }
         }

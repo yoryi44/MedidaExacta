@@ -9,7 +9,10 @@ import com.jorgemeza.medidaexacta.client.ui.detail.ClientDetailScreen
 import com.jorgemeza.medidaexacta.client.ui.list.ClientScreen
 import com.jorgemeza.medidaexacta.invoice.ui.InvoiceScreen
 import com.jorgemeza.medidaexacta.menu.ui.MenuScreeen
-import com.jorgemeza.medidaexacta.quotation.ui.QuotationScreen
+import com.jorgemeza.medidaexacta.quotation.ui.detail.QuotationDetailScreen
+import com.jorgemeza.medidaexacta.quotation.ui.list.QuotationScreen
+import com.jorgemeza.medidaexacta.quotation.ui.shoppingCar.detail.ShopingCarDetailScreen
+import com.jorgemeza.medidaexacta.quotation.ui.shoppingCar.list.ShoppingCarScreen
 
 @Composable
 fun NavigationHost(
@@ -27,14 +30,16 @@ fun NavigationHost(
 
         //Client
         composable<Client> {
-            ClientScreen() {
-                navHostController.navigate(ClientDetail(clientId = it))
+            ClientScreen {
+                navHostController.navigate(ClientDetail(id = it))
             }
         }
 
         //Quotation
         composable<Quotation> {
-            QuotationScreen()
+            QuotationScreen {
+                navHostController.navigate(QuotationDetail(id = it))
+            }
         }
 
         //Invoice
@@ -42,10 +47,46 @@ fun NavigationHost(
             InvoiceScreen()
         }
 
-        //Detail
+        //Client Detail
         composable<ClientDetail> {
             val detail = it.toRoute<ClientDetail>()
-            ClientDetailScreen(detail.clientId) {
+            ClientDetailScreen(detail.id) {
+                navHostController.popBackStack()
+            }
+        }
+
+        //Quotation Detail
+        composable<QuotationDetail> {
+            val quotation = it.toRoute<QuotationDetail>()
+            QuotationDetailScreen(
+                onSaved = {
+                    navHostController.popBackStack()
+                },
+                onShoppingCar = {
+                    navHostController.navigate(ShoppingCar(id = it))
+                },
+                quotationId = quotation.id
+            )
+        }
+
+        //Shopping Car
+        composable<ShoppingCar> {
+            val quotation = it.toRoute<ShoppingCar>()
+            ShoppingCarScreen (
+                quotation.id,
+                onSaved = {
+                    navHostController.popBackStack()
+                },
+                onDetail = {
+                    navHostController.navigate(ShoppingCarDetail(id = it))
+                }
+            )
+        }
+
+        //Shopping Car Detail
+        composable<ShoppingCarDetail> {
+            val detail = it.toRoute<ShoppingCarDetail>()
+            ShopingCarDetailScreen(detail.id) {
                 navHostController.popBackStack()
             }
         }

@@ -1,6 +1,5 @@
 package com.jorgemeza.medidaexacta.core.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
@@ -16,6 +15,7 @@ import androidx.compose.ui.unit.dp
 fun ButtonComponent(
     modifier: Modifier = Modifier,
     text: String,
+    color: Color = Color.Black,
     onClick: () -> Unit
 ) {
 
@@ -24,7 +24,7 @@ fun ButtonComponent(
             .fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.textButtonColors(
-            containerColor = Color.Black
+            containerColor = color,
         ),
         onClick = {
             onClick()

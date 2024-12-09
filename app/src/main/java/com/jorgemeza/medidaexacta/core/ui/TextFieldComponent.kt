@@ -36,6 +36,7 @@ fun TextFieldComponent(
     leadingIcon: ImageVector?,
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
     keyboardActions: KeyboardActions = KeyboardActions(),
+    enabled: Boolean = true,
     onValueChange: (String) -> Unit
 ) {
     var passwordVisibility by remember { mutableStateOf(false) }
@@ -53,6 +54,7 @@ fun TextFieldComponent(
             value = value,
             onValueChange = { onValueChange(it) },
             modifier = modifier,
+            enabled = enabled,
             label = { if(!label.isNullOrBlank()) Text(label) },
             placeholder = { if(isPassword) Text("********") else if(!placeholder.isNullOrBlank()) Text(placeholder) },
             leadingIcon = { if(leadingIcon != null) Icon(imageVector = leadingIcon, contentDescription = "leadingIcon")},

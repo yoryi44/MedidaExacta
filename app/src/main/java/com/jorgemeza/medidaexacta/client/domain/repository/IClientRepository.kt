@@ -1,6 +1,6 @@
 package com.jorgemeza.medidaexacta.client.domain.repository
 
-import com.jorgemeza.medidaexacta.client.ui.list.models.ClientModel
+import com.jorgemeza.medidaexacta.client.domain.model.ClientModel
 import kotlinx.coroutines.flow.Flow
 
 interface IClientRepository {

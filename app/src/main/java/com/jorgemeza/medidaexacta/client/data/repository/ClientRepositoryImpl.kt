@@ -7,9 +7,8 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.example.home_data.remote.util.resultOf
+import com.jorgemeza.medidaexacta.core.util.resultOf
 import com.jorgemeza.medidaexacta.client.data.local.ClientDao
-import com.jorgemeza.medidaexacta.client.data.local.entity.ClientSyncEntity
 import com.jorgemeza.medidaexacta.client.data.mapper.toDomain
 import com.jorgemeza.medidaexacta.client.data.mapper.toDto
 import com.jorgemeza.medidaexacta.client.data.mapper.toEntity
@@ -17,7 +16,7 @@ import com.jorgemeza.medidaexacta.client.data.mapper.toSyncEntity
 import com.jorgemeza.medidaexacta.client.data.remote.IClientApi
 import com.jorgemeza.medidaexacta.client.data.sync.ClientSyncWorker
 import com.jorgemeza.medidaexacta.client.domain.repository.IClientRepository
-import com.jorgemeza.medidaexacta.client.ui.list.models.ClientModel
+import com.jorgemeza.medidaexacta.client.domain.model.ClientModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
