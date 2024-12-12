@@ -4,10 +4,10 @@ import com.jorgemeza.medidaexacta.quotation.domain.repository.IQuotationReposito
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class GetQuotationDetailProductByIdUseCase (
+class GetAllQuotationDetailUseCase(
     private val quotationRepository: IQuotationRepository
 ) {
-    suspend operator fun invoke(quotationId: String) = withContext(Dispatchers.IO) {
-        quotationRepository.getQuotationDetailProductById(quotationId)
+    suspend operator fun invoke() = withContext(Dispatchers.IO) {
+        quotationRepository.getAllQuotationDetail()
     }
 }

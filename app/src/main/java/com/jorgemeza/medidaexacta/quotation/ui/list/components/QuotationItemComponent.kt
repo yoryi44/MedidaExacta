@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.jorgemeza.medidaexacta.core.ext.toPrice
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
+import com.jorgemeza.medidaexacta.ui.theme.Danger
 
 @Composable
 fun QuotationItemComponent(
@@ -31,16 +32,18 @@ fun QuotationItemComponent(
 ) {
 
     Card(
-        modifier = modifier.padding(5.dp).pointerInput(Unit) {
-            detectTapGestures(
-                onLongPress = {
-                    onLongClick()
-                },
-                onTap = {
-                    onClickItem(quotation.id)
-                }
-            )
-        }, colors = CardColors(
+        modifier = modifier
+            .padding(5.dp)
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onLongPress = {
+                        onLongClick()
+                    },
+                    onTap = {
+                        onClickItem(quotation.id)
+                    }
+                )
+            }, colors = CardColors(
             containerColor = Color.White,
             contentColor = Color.White,
             disabledContainerColor = Color.White,
@@ -58,7 +61,7 @@ fun QuotationItemComponent(
                 Icons.Default.DateRange,
                 contentDescription = "",
                 Modifier.size(80.dp),
-                tint = Color.Black
+                tint = if(quotation.price.isEmpty()) Danger else Color.Black
             )
             Column {
 

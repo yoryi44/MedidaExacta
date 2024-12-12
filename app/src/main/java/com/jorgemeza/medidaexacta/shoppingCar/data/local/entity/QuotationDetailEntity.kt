@@ -1,4 +1,4 @@
-package com.jorgemeza.medidaexacta.quotation.data.local.entity
+package com.jorgemeza.medidaexacta.shoppingCar.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,16 +1,14 @@
-package com.jorgemeza.medidaexacta.quotation.ui.shoppingCar.detail
+package com.jorgemeza.medidaexacta.shoppingCar.ui.detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,16 +20,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jorgemeza.medidaexacta.core.ext.toPrice
 import com.jorgemeza.medidaexacta.core.ui.ButtonComponent
 import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
 import com.jorgemeza.medidaexacta.core.ui.TextFieldComponent
-import com.jorgemeza.medidaexacta.quotation.ui.detail.QuotationDetailEvent
-import com.jorgemeza.medidaexacta.quotation.ui.detail.QuotationDetailViewModel
 
 @Composable
 fun ShopingCarDetailScreen(
     detailId: String?,
+    quotationId: String?,
     shoppingCarDetailViewModel: ShoppingCarDetailViewModel = hiltViewModel(),
     onSaved: () -> Unit
 ) {
@@ -43,6 +39,12 @@ fun ShopingCarDetailScreen(
     LaunchedEffect(detailId) {
         if (detailId != null) {
             shoppingCarDetailViewModel.getProductById(detailId)
+        }
+    }
+
+    LaunchedEffect(quotationId) {
+        if(quotationId != null) {
+        shoppingCarDetailViewModel.onEvent(ShoppingCarDetailEvent.OnQuotationIdEvent(quotationId))
         }
     }
 
@@ -78,10 +80,12 @@ fun ShopingCarDetailScreen(
                         FocusDirection.Next
                     )
                 }),
-            ) {}
+            ) {
+                shoppingCarDetailViewModel.onEvent(ShoppingCarDetailEvent.OnProductEvent(it))
+            }
 
             TextFieldComponent(
-                value = state.price.toPrice(),
+                value = state.price,
                 leadingIcon = Icons.Default.ShoppingCart,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -89,7 +93,7 @@ fun ShopingCarDetailScreen(
                 label = "Price",
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
-                    keyboardType = KeyboardType.Text,
+                    keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next
                 ),
                 keyboardActions = KeyboardActions(onAny = {
@@ -97,7 +101,9 @@ fun ShopingCarDetailScreen(
                         FocusDirection.Next
                     )
                 }),
-            ) {}
+            ) {
+                shoppingCarDetailViewModel.onEvent(ShoppingCarDetailEvent.OnPriceEvent(it))
+            }
 
             TextFieldComponent(
                 value = state.amount,
@@ -108,20 +114,20 @@ fun ShopingCarDetailScreen(
                 label = "Amount",
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
-                    keyboardType = KeyboardType.Phone,
-                    imeAction = ImeAction.Next
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(onAny = {
-                    focusManager.moveFocus(
-                        FocusDirection.Next
-                    )
+                    focusManager.clearFocus(true)
                 }),
             ) {
-//                quotationDetailViewModel.onEvent(QuotationDetailEvent.OnClientChange(it))
+                shoppingCarDetailViewModel.onEvent(ShoppingCarDetailEvent.OnAmountEvent(it))
             }
 
+            Spacer(Modifier.weight(1f))
+
             ButtonComponent(text = "Save") {
-//                quotationDetailViewModel.onEvent(QuotationDetailEvent.OnSave)
+                shoppingCarDetailViewModel.onEvent(ShoppingCarDetailEvent.OnSave)
             }
         }
 

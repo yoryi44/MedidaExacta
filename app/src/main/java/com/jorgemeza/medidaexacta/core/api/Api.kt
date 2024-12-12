@@ -12,4 +12,8 @@ object Api {
     const val QUOTATION_URL = "quotations.json"
     const val QUOTATION_DELETE_URL = "quotations/{quotationId}.json"
 
+    //DETAIL
+    const val DETAIL_URL = "details.json"
+    const val DETAIL_DELETE_URL = "details/{detailId}.json"
+
 }

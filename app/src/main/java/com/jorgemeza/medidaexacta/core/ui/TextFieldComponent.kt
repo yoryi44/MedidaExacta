@@ -78,7 +78,7 @@ fun TextFieldComponent(
                 unfocusedBorderColor = Color.Gray,
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White,
-                disabledLabelColor = Color.White,
+                disabledLabelColor = Color.Gray,
             ),
         )
         if(errorMessaje != null){

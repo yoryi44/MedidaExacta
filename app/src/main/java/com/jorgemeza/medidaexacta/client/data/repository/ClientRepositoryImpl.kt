@@ -7,7 +7,6 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.jorgemeza.medidaexacta.core.util.resultOf
 import com.jorgemeza.medidaexacta.client.data.local.ClientDao
 import com.jorgemeza.medidaexacta.client.data.mapper.toDomain
 import com.jorgemeza.medidaexacta.client.data.mapper.toDto
@@ -15,8 +14,9 @@ import com.jorgemeza.medidaexacta.client.data.mapper.toEntity
 import com.jorgemeza.medidaexacta.client.data.mapper.toSyncEntity
 import com.jorgemeza.medidaexacta.client.data.remote.IClientApi
 import com.jorgemeza.medidaexacta.client.data.sync.ClientSyncWorker
-import com.jorgemeza.medidaexacta.client.domain.repository.IClientRepository
 import com.jorgemeza.medidaexacta.client.domain.model.ClientModel
+import com.jorgemeza.medidaexacta.client.domain.repository.IClientRepository
+import com.jorgemeza.medidaexacta.core.util.resultOf
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
@@ -37,7 +37,7 @@ class ClientRepositoryImpl(
 
         val apiFlow = getClientFormApi()
 
-        return localFlow.combine(apiFlow) {db,api -> db}
+        return localFlow.combine(apiFlow) { db, api -> db }
     }
 
     override suspend fun getClientById(id: String): ClientModel {
@@ -60,42 +60,41 @@ class ClientRepositoryImpl(
 
     @Transaction
     override suspend fun deleteClient(id: String): Result<Unit> {
-        return resultOf {
+        return runCatching {
             clientApi.deleteClientById(id)
-        }.onSuccess {
             clientDao.deleteClientById(id)
             clientDao.deleteClientSyncById(id)
-            Result.success(Unit)
         }
     }
 
-    override suspend fun syncClient() {
-        val worker = OneTimeWorkRequestBuilder<ClientSyncWorker>().setConstraints(
-            Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
-        ).setBackoffCriteria(BackoffPolicy.EXPONENTIAL, Duration.ofMinutes(5))
-            .build()
+        override suspend fun syncClient() {
+            val worker = OneTimeWorkRequestBuilder<ClientSyncWorker>().setConstraints(
+                Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+            ).setBackoffCriteria(BackoffPolicy.EXPONENTIAL, Duration.ofMinutes(5))
+                .build()
 
-        workManager.beginUniqueWork("client_client_id", ExistingWorkPolicy.REPLACE, worker).enqueue()
-    }
+            workManager.beginUniqueWork("client_client_id", ExistingWorkPolicy.REPLACE, worker)
+                .enqueue()
+        }
 
-    private fun getClientFormApi(): Flow<List<ClientModel>> {
-        return flow {
+        private fun getClientFormApi(): Flow<List<ClientModel>> {
+            return flow {
 
-            resultOf {
-                val response = clientApi.getAllClient().toDomain()
-                insertClient(response)
+                resultOf {
+                    val response = clientApi.getAllClient().toDomain()
+                    insertClient(response)
+                }
+
+                emit(emptyList<ClientModel>())
+
+            }.onStart {
+                emit(emptyList())
             }
+        }
 
-            emit(emptyList<ClientModel>())
-
-        }.onStart {
-            emit(emptyList())
+        private suspend fun insertClient(client: List<ClientModel>) {
+            client.forEach {
+                clientDao.insertClient(it.toEntity())
+            }
         }
     }
-
-    private suspend fun insertClient(client: List<ClientModel>) {
-        client.forEach {
-            clientDao.insertClient(it.toEntity())
-        }
-    }
-}

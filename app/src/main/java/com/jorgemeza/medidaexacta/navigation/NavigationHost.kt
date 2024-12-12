@@ -11,8 +11,8 @@ import com.jorgemeza.medidaexacta.invoice.ui.InvoiceScreen
 import com.jorgemeza.medidaexacta.menu.ui.MenuScreeen
 import com.jorgemeza.medidaexacta.quotation.ui.detail.QuotationDetailScreen
 import com.jorgemeza.medidaexacta.quotation.ui.list.QuotationScreen
-import com.jorgemeza.medidaexacta.quotation.ui.shoppingCar.detail.ShopingCarDetailScreen
-import com.jorgemeza.medidaexacta.quotation.ui.shoppingCar.list.ShoppingCarScreen
+import com.jorgemeza.medidaexacta.shoppingCar.ui.detail.ShopingCarDetailScreen
+import com.jorgemeza.medidaexacta.shoppingCar.ui.list.ShoppingCarScreen
 
 @Composable
 fun NavigationHost(
@@ -62,8 +62,8 @@ fun NavigationHost(
                 onSaved = {
                     navHostController.popBackStack()
                 },
-                onShoppingCar = {
-                    navHostController.navigate(ShoppingCar(id = it))
+                onShoppingCar = { id,quotation ->
+                    navHostController.navigate(ShoppingCar(id = id))
                 },
                 quotationId = quotation.id
             )
@@ -74,11 +74,8 @@ fun NavigationHost(
             val quotation = it.toRoute<ShoppingCar>()
             ShoppingCarScreen (
                 quotation.id,
-                onSaved = {
-                    navHostController.popBackStack()
-                },
                 onDetail = {
-                    navHostController.navigate(ShoppingCarDetail(id = it))
+                    navHostController.navigate(ShoppingCarDetail(id = it,quotation = quotation.id))
                 }
             )
         }
@@ -86,7 +83,7 @@ fun NavigationHost(
         //Shopping Car Detail
         composable<ShoppingCarDetail> {
             val detail = it.toRoute<ShoppingCarDetail>()
-            ShopingCarDetailScreen(detail.id) {
+            ShopingCarDetailScreen(detailId = detail.id,quotationId = detail.quotation) {
                 navHostController.popBackStack()
             }
         }

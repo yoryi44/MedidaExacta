@@ -24,4 +24,4 @@ data class QuotationDetail(val id: String?)
 data class ShoppingCar(val id: String?)
 
 @Serializable
-data class ShoppingCarDetail(val id: String?)
+data class ShoppingCarDetail(val id: String?, val quotation: String?)

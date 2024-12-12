@@ -31,12 +31,20 @@ hiltNavigationVersion = "1.2.0"
 hiltAndroidCompiler = "2.50"
 hiltCompiler = "1.2.0"
 protoliteWellKnownTypesVersion = "18.0.0"
-firebaseCrashlytics = "19.2.1"
+
+#FIREBASE
+firebaseCrashlytics = "19.3.0"
 googleGmsGoogleServices = "4.4.2"
 googleFirebaseCrashlytics = "3.0.2"
 
 #ROOM
 room = "2.6.1"
+
+#ITEXT
+itextVersion = "7.2.5"
+
+#SPLASH SCREN
+coreSplashscreen = "1.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,6 +61,10 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+#SPLASH SCREEN
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+
 
 #RETROFIT
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
@@ -81,6 +93,9 @@ room-ktx = { module = "androidx.room:room-ktx",version.ref = "room" }
 #WORK MANAGER
 androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtxVersion" }
 androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltWorkVersion" }
+
+#ITEXT PDF
+i-text = { module = "com.itextpdf:itext7-core", version.ref = "itextVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -6,4 +6,6 @@ data class QuotationState(
     val searchQuery: String = "",
     val isLoading: Boolean = false,
     val quotations: List<QuotationModel> = emptyList(),
+    val idQuotationDelete: String? = null,
+    val error : String? = null
 )
