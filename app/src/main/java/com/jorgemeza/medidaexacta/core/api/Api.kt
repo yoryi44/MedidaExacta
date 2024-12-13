@@ -16,4 +16,8 @@ object Api {
     const val DETAIL_URL = "details.json"
     const val DETAIL_DELETE_URL = "details/{detailId}.json"
 
+    //INVOICE
+    const val INVOICE_URL = "invoices.json"
+    const val INVOICE_DELETE_URL = "invoices/{invoicesId}.json"
+
 }

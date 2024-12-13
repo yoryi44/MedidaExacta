@@ -4,7 +4,6 @@ import com.jorgemeza.medidaexacta.client.data.local.ClientDao
 import com.jorgemeza.medidaexacta.core.util.resultOf
 import com.jorgemeza.medidaexacta.quotation.data.local.QuotationDao
 import com.jorgemeza.medidaexacta.quotation.data.mapper.toDomain
-import com.jorgemeza.medidaexacta.quotation.data.mapper.toDetailDomain
 import com.jorgemeza.medidaexacta.quotation.data.mapper.toDto
 import com.jorgemeza.medidaexacta.quotation.data.mapper.toEntity
 import com.jorgemeza.medidaexacta.quotation.data.mapper.toSyncEntity
@@ -12,8 +11,13 @@ import com.jorgemeza.medidaexacta.quotation.data.remote.IQuotationApi
 import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
 import com.jorgemeza.medidaexacta.quotation.domain.repository.IQuotationRepository
+import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toDetailDomain
+import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toDomain
+import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toDto
+import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toEntity
+import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toSyncEntity
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
-import com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto.IDetailApi
+import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
@@ -23,7 +27,6 @@ import kotlinx.coroutines.flow.onStart
 class QuotationRepositoryImpl(
     private val detailApi: IDetailApi,
     private val quotationApi: IQuotationApi,
-    private val clientDao: ClientDao,
     private val quotationDao: QuotationDao,
     private val detailDao: DetailDao
 ) : IQuotationRepository {
@@ -72,7 +75,7 @@ class QuotationRepositoryImpl(
     }
 
     override suspend fun getDetailById(id: String): List<DetailModel> {
-        return detailDao.getQuotationDetailById(id).map {
+        return detailDao.getDetailById(id).map {
             it.toDomain()
         }
     }
@@ -117,8 +120,8 @@ class QuotationRepositoryImpl(
         return flow {
 
             resultOf {
-                var response = quotationApi.getAllQuotation()
-                insertQuotation(response.toDomain())
+                var response = quotationApi.getAllQuotation().toDomain()
+                insertQuotation(response)
             }
 
             emit(emptyList<QuotationModel>())

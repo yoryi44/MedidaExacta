@@ -2,9 +2,8 @@ package com.jorgemeza.medidaexacta.shoppingCar.data.di
 
 import com.jorgemeza.medidaexacta.core.api.Api.BASE_URL
 import com.jorgemeza.medidaexacta.core.db.MedidaExactaDataBase
-import com.jorgemeza.medidaexacta.quotation.data.remote.IQuotationApi
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
-import com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto.IDetailApi
+import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
 import com.jorgemeza.medidaexacta.shoppingCar.data.repository.DetailRepositoryImpl
 import com.jorgemeza.medidaexacta.shoppingCar.domain.repository.IDetailRepository
 import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.AddDetailUseCase

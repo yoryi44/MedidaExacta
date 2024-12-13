@@ -27,7 +27,7 @@ class ClientViewModel @Inject constructor(
     var state by mutableStateOf(ClientState())
         private set
 
-    private var currentDayJob : Job? = null
+    private var clientsJob : Job? = null
 
     init {
         getAllClient()
@@ -79,8 +79,8 @@ class ClientViewModel @Inject constructor(
     }
 
     fun getAllClient() {
-        currentDayJob?.cancel()
-        currentDayJob = viewModelScope.launch {
+        clientsJob?.cancel()
+        clientsJob = viewModelScope.launch {
 
             state = state.copy(
                 isLoading = true

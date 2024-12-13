@@ -67,34 +67,34 @@ class ClientRepositoryImpl(
         }
     }
 
-        override suspend fun syncClient() {
-            val worker = OneTimeWorkRequestBuilder<ClientSyncWorker>().setConstraints(
-                Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
-            ).setBackoffCriteria(BackoffPolicy.EXPONENTIAL, Duration.ofMinutes(5))
-                .build()
+    override suspend fun syncClient() {
+        val worker = OneTimeWorkRequestBuilder<ClientSyncWorker>().setConstraints(
+            Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+        ).setBackoffCriteria(BackoffPolicy.EXPONENTIAL, Duration.ofMinutes(5))
+            .build()
 
-            workManager.beginUniqueWork("client_client_id", ExistingWorkPolicy.REPLACE, worker)
-                .enqueue()
-        }
+        workManager.beginUniqueWork("client_client_id", ExistingWorkPolicy.REPLACE, worker)
+            .enqueue()
+    }
 
-        private fun getClientFormApi(): Flow<List<ClientModel>> {
-            return flow {
+    private fun getClientFormApi(): Flow<List<ClientModel>> {
+        return flow {
 
-                resultOf {
-                    val response = clientApi.getAllClient().toDomain()
-                    insertClient(response)
-                }
-
-                emit(emptyList<ClientModel>())
-
-            }.onStart {
-                emit(emptyList())
+            resultOf {
+                val response = clientApi.getAllClient().toDomain()
+                insertClient(response)
             }
-        }
 
-        private suspend fun insertClient(client: List<ClientModel>) {
-            client.forEach {
-                clientDao.insertClient(it.toEntity())
-            }
+            emit(emptyList<ClientModel>())
+
+        }.onStart {
+            emit(emptyList())
         }
     }
+
+    private suspend fun insertClient(client: List<ClientModel>) {
+        client.forEach {
+            clientDao.insertClient(it.toEntity())
+        }
+    }
+}

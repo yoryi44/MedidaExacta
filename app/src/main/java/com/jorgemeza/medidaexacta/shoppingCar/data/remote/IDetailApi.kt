@@ -1,7 +1,8 @@
-package com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto
+package com.jorgemeza.medidaexacta.shoppingCar.data.local
 
 import com.jorgemeza.medidaexacta.core.api.Api.DETAIL_DELETE_URL
 import com.jorgemeza.medidaexacta.core.api.Api.DETAIL_URL
+import com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto.DetailResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET

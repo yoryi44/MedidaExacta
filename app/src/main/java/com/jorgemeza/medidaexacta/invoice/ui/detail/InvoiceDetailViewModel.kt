@@ -1,4 +1,4 @@
-package com.jorgemeza.medidaexacta.quotation.ui.detail
+package com.jorgemeza.medidaexacta.invoice.ui.detail
 
 import android.content.Context
 import androidx.compose.runtime.getValue
@@ -6,13 +6,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jorgemeza.medidaexacta.client.domain.usecase.AddClientUseCase
+import com.jorgemeza.medidaexacta.client.domain.usecase.GetClientByIdUseCase
+import com.jorgemeza.medidaexacta.client.domain.model.ClientModel
 import com.jorgemeza.medidaexacta.client.domain.usecase.GetAllClientUseCase
+import com.jorgemeza.medidaexacta.client.ui.detail.ClientDetailEvent
+import com.jorgemeza.medidaexacta.client.ui.detail.ClientDetailState
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.AddQuotationUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GeneratePdfUseCase
-import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationDetailUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationByIdUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationConsecutiveUseCase
+import com.jorgemeza.medidaexacta.quotation.ui.detail.QuotationDetailEvent
+import com.jorgemeza.medidaexacta.quotation.ui.detail.QuotationDetailState
 import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.GetDetailByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -23,40 +29,30 @@ import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
-class QuotationDetailViewModel @Inject constructor(
+class InvoiceDetailViewModel  @Inject constructor(
     @ApplicationContext val context: Context,
-    private val addQuotationUserCase: AddQuotationUseCase,
     private val getQuotationByIdUseCase: GetQuotationByIdUseCase,
     private val getQuotationDetailByIdUseCase: GetDetailByIdUseCase,
     private val getAllClientsUseCase: GetAllClientUseCase,
-    private val generatePdfUseCase: GeneratePdfUseCase,
-    private val getQuotationConsecutiveUseCase: GetQuotationConsecutiveUseCase
+    private val generatePdfUseCase: GeneratePdfUseCase
 ) : ViewModel() {
 
     lateinit var quotation: QuotationModel
 
     private var pdfJob: Job? = null
 
-    var state by mutableStateOf(QuotationDetailState())
+    var state by mutableStateOf(InvoiceDetailState())
         private set
 
     init {
         loadInitialData()
     }
 
-    fun onEvent(event: QuotationDetailEvent) {
+    fun onEvent(event: InvoiceDetailEvent) {
         when (event) {
 
-            is QuotationDetailEvent.OnClientChange -> {
-                state = state.copy(client = event.client)
-            }
-
-            QuotationDetailEvent.OnSave -> {
-                saveQuotation()
-            }
-
-            QuotationDetailEvent.OnPdf -> createPDF()
-            QuotationDetailEvent.OnDismissDialog -> {
+            InvoiceDetailEvent.OnPdf -> createPDF()
+            InvoiceDetailEvent.OnDismissDialog -> {
                 state = state.copy(
                     error = null,
                 )
@@ -65,54 +61,7 @@ class QuotationDetailViewModel @Inject constructor(
         }
     }
 
-    private fun saveQuotation() {
-
-        if(validateForm())
-        {
-            viewModelScope.launch {
-                val quotation = QuotationModel(
-                    id = state.id ?: UUID.randomUUID().toString(),
-                    client = state.clients.firstOrNull { it.name == state.client }!!.id,
-                    quotationNumber = state.quotationNumber,
-                    price = state.price,
-                    date = state.date,
-                )
-
-                addQuotationUserCase(quotation)
-            }
-            state = state.copy(
-                isSaveSuccessful = true
-            )
-        }
-
-    }
-
-    private fun validateForm(): Boolean {
-        var validate = true
-
-        if(state.client.isBlank())
-        {
-            state = state.copy(error = "Choose an option")
-            validate = false
-        }
-
-        return validate
-    }
-
-    fun createQuotation() {
-
-        viewModelScope.launch {
-            val consecutive = getQuotationConsecutiveUseCase()
-
-            state = state.copy(
-                quotationNumber = consecutive,
-                date = LocalDate.now().toString(),
-                isLoading = false
-            )
-        }
-    }
-
-    fun getQuotationById(quotationId: String) {
+    fun getInvoiceById(quotationId: String) {
 
         viewModelScope.launch {
 

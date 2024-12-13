@@ -1,4 +1,4 @@
-package com.jorgemeza.medidaexacta.invoice.ui
+package com.jorgemeza.medidaexacta.invoice.ui.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,18 +15,16 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jorgemeza.medidaexacta.core.ui.FloatingActionButtonComponent
 import com.jorgemeza.medidaexacta.core.ui.TopBarComponent
-import com.jorgemeza.medidaexacta.invoice.ui.components.InvoiceItemComponent
+import com.jorgemeza.medidaexacta.invoice.ui.list.components.InvoiceItemComponent
 import com.jorgemeza.medidaexacta.ui.theme.LigthGray
-import com.jorgemeza.medidaexacta.ui.theme.WarmGray
 
 @Composable
 fun InvoiceScreen(
-    invoiceViewModel: InvoiceViewModel = hiltViewModel()
+    invoiceViewModel: InvoiceViewModel = hiltViewModel(),
+    onDetail: (String?) -> Unit
 ) {
 
     val state = invoiceViewModel.state
-
-    val items = List(10) { "Elemento #$it" }
 
     Scaffold(
         floatingActionButton = {
@@ -58,8 +56,11 @@ fun InvoiceScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp)
                 ) {
-                    items(items) { item ->
-                        InvoiceItemComponent(text = item)
+                    items(state.invoices) { item ->
+                        InvoiceItemComponent(invoice = item,
+                            onClickItem = {onDetail(item.quotation)},
+                            onLongClick = {}
+                        )
                     }
                 }
             }

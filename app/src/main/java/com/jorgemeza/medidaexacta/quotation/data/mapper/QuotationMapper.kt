@@ -11,10 +11,6 @@ import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
 import com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto.DetailResponse
 
-/***********************************************************
- * Quotation Mapper
- ***********************************************************/
-
 fun QuotationResponse.toDomain(): List<QuotationModel> {
 
     return this.map {
@@ -63,68 +59,3 @@ fun QuotationModel.toSyncEntity(): QuotationSyncEntity {
         id = this.id
     )
 }
-
-/***************************************************************
- * Quotation Detail Mapper
- ***************************************************************/
-
-fun DetailResponse.toDetailDomain(): List<DetailModel> {
-
-    return this.map {
-        DetailModel(
-            id = it.key,
-            price = it.value.price,
-            amount = it.value.amount,
-            product = it.value.product,
-            quotation = it.value.quotation
-        )
-    }
-}
-
-fun DetailDto.toEntity(quotationKey: String,key: String): QuotationDetailEntity {
-    return QuotationDetailEntity(
-        id = key,
-        quotation = quotationKey,
-        amount = this.amount,
-        price = this.price,
-        product = this.product
-    )
-}
-
-fun QuotationDetailEntity.toDomain() : DetailModel {
-    return DetailModel(
-        id = this.id,
-        quotation = this.quotation,
-        amount = this.amount,
-        price = this.price,
-        product = this.product
-    )
-}
-
-fun DetailModel.toEntity(): QuotationDetailEntity {
-    return QuotationDetailEntity(
-        id = this.id,
-        quotation = this.quotation,
-        amount = this.amount,
-        price = this.price,
-        product = this.product
-    )
-}
-
-fun DetailModel.toDto(): DetailResponse {
-    val dto = DetailDto(
-        amount = this.amount,
-        price = this.price,
-        product = this.product,
-        quotation = this.quotation
-    )
-
-    return mapOf(this.id to dto)
-}
-
-fun DetailModel.toSyncEntity(): DetailSyncEntity {
-    return DetailSyncEntity(
-        id = this.id
-    )
-}
-

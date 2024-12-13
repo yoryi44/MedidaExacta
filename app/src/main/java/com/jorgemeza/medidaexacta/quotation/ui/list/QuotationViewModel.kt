@@ -6,9 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.DeleteQuotationUseCase
+import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationDetailUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationBySearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,8 +19,11 @@ import javax.inject.Inject
 class QuotationViewModel @Inject constructor(
     private val getAllQuotationUseCase: GetAllQuotationUseCase,
     private val deleteQuotationUseCase: DeleteQuotationUseCase,
+    private val getAllQuotationDetailUseCase: GetAllQuotationDetailUseCase,
     private val getQuotationBySearchUseCase: GetQuotationBySearchUseCase
 ) : ViewModel() {
+
+    private var quotationJob : Job? = null
 
     var state by mutableStateOf(QuotationState())
         private set
@@ -70,10 +75,14 @@ class QuotationViewModel @Inject constructor(
 
     fun getAllQuotation() {
 
-        viewModelScope.launch {
+        quotationJob?.cancel()
+        quotationJob = viewModelScope.launch {
+
             state = state.copy(
                 isLoading = true
             )
+
+            getAllQuotationDetailUseCase()
 
             getAllQuotationUseCase().collectLatest { quotations ->
                 state = state.copy(

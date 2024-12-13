@@ -17,7 +17,7 @@ import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationByIdUseCa
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationBySearchUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationConsecutiveUseCase
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
-import com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto.IDetailApi
+import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,11 +37,10 @@ object QuotationModule {
     fun provideQuotationRepository(
         detailApi: IDetailApi,
         quotationApi: IQuotationApi,
-        clientDao: ClientDao,
         quotationDao: QuotationDao,
         detailDao: DetailDao
     ): IQuotationRepository {
-        return QuotationRepositoryImpl(detailApi, quotationApi, clientDao, quotationDao, detailDao)
+        return QuotationRepositoryImpl(detailApi, quotationApi, quotationDao, detailDao)
     }
 
     @Provides

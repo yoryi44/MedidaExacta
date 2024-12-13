@@ -1,13 +1,13 @@
 package com.jorgemeza.medidaexacta.shoppingCar.data.repository
 
 import com.jorgemeza.medidaexacta.core.util.resultOf
-import com.jorgemeza.medidaexacta.quotation.data.mapper.toDomain
-import com.jorgemeza.medidaexacta.quotation.data.mapper.toDto
-import com.jorgemeza.medidaexacta.quotation.data.mapper.toEntity
-import com.jorgemeza.medidaexacta.quotation.data.mapper.toSyncEntity
 import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
+import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toDomain
+import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toDto
+import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toEntity
+import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toSyncEntity
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
-import com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto.IDetailApi
+import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
 import com.jorgemeza.medidaexacta.shoppingCar.domain.repository.IDetailRepository
 
 class DetailRepositoryImpl(
@@ -25,7 +25,7 @@ class DetailRepositoryImpl(
     }
 
     override suspend fun getDetailById(id: String): List<DetailModel> {
-        return detailDao.getQuotationDetailById(id).map {
+        return detailDao.getDetailById(id).map {
             it.toDomain()
         }
     }

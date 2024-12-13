@@ -7,7 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.jorgemeza.medidaexacta.client.ui.detail.ClientDetailScreen
 import com.jorgemeza.medidaexacta.client.ui.list.ClientScreen
-import com.jorgemeza.medidaexacta.invoice.ui.InvoiceScreen
+import com.jorgemeza.medidaexacta.invoice.ui.detail.InvoiceDetailScreen
+import com.jorgemeza.medidaexacta.invoice.ui.list.InvoiceScreen
 import com.jorgemeza.medidaexacta.menu.ui.MenuScreeen
 import com.jorgemeza.medidaexacta.quotation.ui.detail.QuotationDetailScreen
 import com.jorgemeza.medidaexacta.quotation.ui.list.QuotationScreen
@@ -44,7 +45,18 @@ fun NavigationHost(
 
         //Invoice
         composable<Invoice> {
-            InvoiceScreen()
+            InvoiceScreen(
+                onDetail = {
+                    navHostController.navigate(InvoiceDetail(id = it))
+                }
+            )
+        }
+
+        composable<InvoiceDetail> {
+            val invoice = it.toRoute<InvoiceDetail>()
+            InvoiceDetailScreen (
+                invoice.id,
+            )
         }
 
         //Client Detail
