@@ -93,7 +93,7 @@ class QuotationDetailViewModel @Inject constructor(
     private fun validateForm(): Boolean {
         var validate = true
 
-        if(state.client.isNullOrBlank())
+        if(state.client.isBlank())
         {
             state = state.copy(error = "Choose an option")
             validate = false
@@ -123,11 +123,8 @@ class QuotationDetailViewModel @Inject constructor(
                 isLoading = true
             )
 
-            val quotationRequest = async { getQuotationByIdUseCase(quotationId) }
-            val productsRequest = async { getQuotationDetailByIdUseCase(quotationId) }
-
-            quotation = quotationRequest.await()
-            val products = productsRequest.await()
+            quotation = getQuotationByIdUseCase(quotationId)
+            val products = getQuotationDetailByIdUseCase(quotationId)
 
             state = state.copy(
                 id = quotation.id,

@@ -22,13 +22,7 @@ import kotlin.getValue
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val mainViewModel by viewModels<MainViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        installSplashScreen().setKeepOnScreenCondition {
-            mainViewModel.isLoading
-        }
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
