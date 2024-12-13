@@ -4,8 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.DetailSyncEntity
-import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.QuotationDetailEntity
 import com.jorgemeza.medidaexacta.quotation.data.local.entity.QuotationEntity
 import com.jorgemeza.medidaexacta.quotation.data.local.entity.QuotationSyncEntity
 import kotlinx.coroutines.flow.Flow
@@ -13,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface QuotationDao {
 
-    @Query("SELECT * FROM QuotationEntity ORDER BY date DESC")
+    @Query("SELECT q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id ORDER BY date DESC")
     fun getAllQuotation(): Flow<List<QuotationEntity>>
 
-    @Query("SELECT * FROM QuotationEntity WHERE id = :id")
+    @Query("SELECT q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id WHERE q.id = :id")
     suspend fun getQuotationById(id: String): QuotationEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -36,5 +34,11 @@ interface QuotationDao {
 
     @Query("SELECT (MAX(quotationNumber) +1) FROM QuotationEntity")
     suspend fun getQuotationConsecutive(): String
+
+    @Query("SELECT q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id WHERE client LIKE '%' || :search || '%' " +
+            "OR price LIKE '%' || :search || '%' OR date LIKE '%' || :search || '%' " +
+            "OR name LIKE '%' || :search || '%' " +
+            "ORDER BY date ASC")
+    fun getQuotationBySearch(search: String): List<QuotationEntity>
 
 }

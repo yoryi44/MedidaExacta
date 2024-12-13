@@ -33,9 +33,7 @@ class QuotationRepositoryImpl(
         val localFlow = quotationDao.getAllQuotation()
             .map { quotation ->
                 quotation.map {
-                    it.toDomain().copy(
-                        client = clientDao.getClientById(it.client).name
-                    )
+                    it.toDomain()
                 }
             }
 
@@ -52,11 +50,7 @@ class QuotationRepositoryImpl(
     }
 
     override suspend fun getQuotationById(id: String): QuotationModel {
-        return quotationDao.getQuotationById(id).toDomain().let { quotation ->
-            quotation.copy(
-                client = clientDao.getClientById(quotation.client).name
-            )
-        }
+        return quotationDao.getQuotationById(id).toDomain()
     }
 
     override suspend fun addQuotationUseCase(quotation: QuotationModel) {
@@ -113,6 +107,10 @@ class QuotationRepositoryImpl(
         }.onFailure {
             Result.failure<Unit>(it)
         }
+    }
+
+    override fun getQuotationBySearch(search: String): List<QuotationModel> {
+        return quotationDao.getQuotationBySearch(search).map { it.toDomain() }
     }
 
     private fun getQuotationFormApi(): Flow<List<QuotationModel>> {

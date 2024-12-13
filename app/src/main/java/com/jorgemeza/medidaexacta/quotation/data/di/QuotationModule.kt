@@ -14,6 +14,7 @@ import com.jorgemeza.medidaexacta.quotation.domain.usecase.GeneratePdfUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationDetailUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationByIdUseCase
+import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationBySearchUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationConsecutiveUseCase
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
 import com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto.IDetailApi
@@ -96,6 +97,12 @@ object QuotationModule {
     @Singleton
     fun provideGetQuotationConsecutiveUseCase(quotationRepository: IQuotationRepository): GetQuotationConsecutiveUseCase {
         return GetQuotationConsecutiveUseCase(quotationRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun providesGetQuotationBySearchUseCase(quotationRepository: IQuotationRepository): GetQuotationBySearchUseCase {
+        return GetQuotationBySearchUseCase(quotationRepository)
     }
 
 }

@@ -84,7 +84,7 @@ fun QuotationScreen(
                         quotationViewModel.onEvent(QuotationEvent.OnSearchQueryChange(it))
                     },
                     onSearch = {
-
+                        quotationViewModel.onEvent(QuotationEvent.OnSearchQuotation)
                     }
                 )
 

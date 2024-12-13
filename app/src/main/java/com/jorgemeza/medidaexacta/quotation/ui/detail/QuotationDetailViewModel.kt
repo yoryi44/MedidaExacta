@@ -41,10 +41,7 @@ class QuotationDetailViewModel @Inject constructor(
         private set
 
     init {
-        viewModelScope.launch {
-            getAllQuotationDetailUseCase()
-            getAllClients()
-        }
+        loadInitialData()
     }
 
     fun onEvent(event: QuotationDetailEvent) {
@@ -140,15 +137,19 @@ class QuotationDetailViewModel @Inject constructor(
 
     }
 
-    private suspend fun getAllClients() {
-        state = state.copy(
-            isLoading = true
-        )
-        getAllClientsUseCase().collect { clients ->
+    private fun loadInitialData() {
+        viewModelScope.launch{
             state = state.copy(
-                clients = clients,
-                isLoading = false
+                isLoading = true
             )
+            getAllQuotationDetailUseCase()
+
+            getAllClientsUseCase().collect { clients ->
+                state = state.copy(
+                    clients = clients,
+                    isLoading = false
+                )
+            }
         }
     }
 

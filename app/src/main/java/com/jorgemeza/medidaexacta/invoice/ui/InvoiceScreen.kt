@@ -1,6 +1,7 @@
 package com.jorgemeza.medidaexacta.invoice.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jorgemeza.medidaexacta.core.ui.FloatingActionButtonComponent
 import com.jorgemeza.medidaexacta.core.ui.TopBarComponent
 import com.jorgemeza.medidaexacta.invoice.ui.components.InvoiceItemComponent
+import com.jorgemeza.medidaexacta.ui.theme.LigthGray
 import com.jorgemeza.medidaexacta.ui.theme.WarmGray
 
 @Composable
@@ -33,24 +35,32 @@ fun InvoiceScreen(
             }
         }
     ) { innerPading ->
-        Column(modifier = Modifier.padding().fillMaxSize()
-            .background(WarmGray.copy(alpha = 0.5f))
-            .fillMaxSize()) {
-            TopBarComponent(value = state.searchQuery,
-                onChange = {
-                    invoiceViewModel.onEvent(InvoiceEvent.OnSearchQueryChange(it))
-                },
-                onSearch = {
 
-                }
-            )
+        Box(modifier = Modifier.fillMaxSize()) {
 
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(16.dp)
+            Column(
+                modifier = Modifier
+                    .padding()
+                    .fillMaxSize()
+                    .background(LigthGray)
+                    .fillMaxSize()
             ) {
-                items(items) { item ->
-                    InvoiceItemComponent(text = item)
+                TopBarComponent(value = state.searchQuery,
+                    onChange = {
+                        invoiceViewModel.onEvent(InvoiceEvent.OnSearchQueryChange(it))
+                    },
+                    onSearch = {
+
+                    }
+                )
+
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(16.dp)
+                ) {
+                    items(items) { item ->
+                        InvoiceItemComponent(text = item)
+                    }
                 }
             }
         }

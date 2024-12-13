@@ -7,4 +7,5 @@ sealed interface QuotationEvent {
     data class OnDeleteQuotation(val id: String) : QuotationEvent
     object OnDismissDialog : QuotationEvent
     object OnConfirmDialog : QuotationEvent
+    object OnSearchQuotation : QuotationEvent
 }

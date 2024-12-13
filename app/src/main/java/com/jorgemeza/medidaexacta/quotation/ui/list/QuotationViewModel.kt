@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.DeleteQuotationUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationUseCase
+import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationBySearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class QuotationViewModel @Inject constructor(
     private val getAllQuotationUseCase: GetAllQuotationUseCase,
-    private val deteleteQuotationUseCase: DeleteQuotationUseCase
+    private val deleteQuotationUseCase: DeleteQuotationUseCase,
+    private val getQuotationBySearchUseCase: GetQuotationBySearchUseCase
 ) : ViewModel() {
 
     var state by mutableStateOf(QuotationState())
@@ -43,12 +45,19 @@ class QuotationViewModel @Inject constructor(
                     error = null
                 )
             }
+            QuotationEvent.OnSearchQuotation -> {
+                viewModelScope.launch {
+                    state = state.copy(
+                        quotations = getQuotationBySearchUseCase(state.searchQuery)
+                    )
+                }
+            }
         }
     }
 
     private fun deleteQuotation(quotationId: String) {
         viewModelScope.launch {
-            deteleteQuotationUseCase(quotationId).onFailure {
+            deleteQuotationUseCase(quotationId).onFailure {
                 state = state.copy(
                     error = it.message,
                 )

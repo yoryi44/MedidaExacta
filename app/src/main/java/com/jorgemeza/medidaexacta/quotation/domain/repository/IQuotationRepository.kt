@@ -16,5 +16,6 @@ interface IQuotationRepository {
     suspend fun getQuotationConsecutive(): String
     suspend fun deleteQuotationDetailUseCase(id: String): Result<Unit>
     suspend fun deleteQuotationUseCase(id: String): Result<Unit>
+    fun getQuotationBySearch(string: String) : List<QuotationModel>
 
 }
