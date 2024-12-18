@@ -23,16 +23,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jorgemeza.medidaexacta.core.ui.AlertDialogComponent
+import com.jorgemeza.medidaexacta.core.ui.ButtonComponent
 import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
 import com.jorgemeza.medidaexacta.core.ui.SelectComponent
 import com.jorgemeza.medidaexacta.core.ui.TextFieldComponent
-import com.jorgemeza.medidaexacta.quotation.ui.detail.QuotationDetailEvent
 import com.jorgemeza.medidaexacta.quotation.ui.detail.components.ListQuotationDetailComponent
 import com.jorgemeza.medidaexacta.ui.theme.Danger
 
 @Composable
 fun InvoiceDetailScreen(
-    quotationId: String?,
+    invoiceId: String?,
     invoiceDetailViewModel: InvoiceDetailViewModel = hiltViewModel()
 ) {
 
@@ -40,9 +40,9 @@ fun InvoiceDetailScreen(
 
     val focusManager = LocalFocusManager.current
 
-    LaunchedEffect(quotationId) {
-        if (quotationId != null)
-            invoiceDetailViewModel.getInvoiceById(quotationId)
+    LaunchedEffect(invoiceId) {
+        if (invoiceId != null)
+            invoiceDetailViewModel.getInvoiceById(invoiceId)
     }
 
     Column(
@@ -141,6 +141,14 @@ fun InvoiceDetailScreen(
             }
 
             ListQuotationDetailComponent(modifier = Modifier.weight(1f), state.products)
+
+
+            ButtonComponent(
+                text = "Print",
+                color = Danger
+            ) {
+                invoiceDetailViewModel.onEvent(InvoiceDetailEvent.OnPdf)
+            }
 
         }
 

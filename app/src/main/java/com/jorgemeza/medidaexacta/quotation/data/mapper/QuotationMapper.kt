@@ -1,15 +1,10 @@
 package com.jorgemeza.medidaexacta.quotation.data.mapper
 
-import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.DetailSyncEntity
-import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.QuotationDetailEntity
 import com.jorgemeza.medidaexacta.quotation.data.local.entity.QuotationEntity
 import com.jorgemeza.medidaexacta.quotation.data.local.entity.QuotationSyncEntity
-import com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto.DetailDto
 import com.jorgemeza.medidaexacta.quotation.data.remote.dto.QuotationDto
 import com.jorgemeza.medidaexacta.quotation.data.remote.dto.QuotationResponse
-import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
-import com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto.DetailResponse
 
 fun QuotationResponse.toDomain(): List<QuotationModel> {
 

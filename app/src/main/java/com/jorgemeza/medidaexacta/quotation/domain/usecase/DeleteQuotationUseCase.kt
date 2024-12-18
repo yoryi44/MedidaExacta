@@ -8,6 +8,6 @@ class DeleteQuotationUseCase(
     private val quotationRepository: IQuotationRepository
 ) {
     suspend operator fun invoke(id: String) : Result<Unit> = withContext(Dispatchers.IO) {
-        quotationRepository.deleteQuotationUseCase(id)
+        quotationRepository.deleteQuotation(id)
     }
 }

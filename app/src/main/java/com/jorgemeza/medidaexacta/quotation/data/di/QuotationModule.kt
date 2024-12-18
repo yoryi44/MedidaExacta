@@ -1,16 +1,17 @@
 package com.jorgemeza.medidaexacta.quotation.data.di
 
 import android.content.Context
-import com.jorgemeza.medidaexacta.client.data.local.ClientDao
 import com.jorgemeza.medidaexacta.core.api.Api.BASE_URL
 import com.jorgemeza.medidaexacta.core.db.MedidaExactaDataBase
 import com.jorgemeza.medidaexacta.quotation.data.local.QuotationDao
+import com.jorgemeza.medidaexacta.quotation.data.pdf.QuotationPdfGeneratorImpl
 import com.jorgemeza.medidaexacta.quotation.data.remote.IQuotationApi
 import com.jorgemeza.medidaexacta.quotation.data.repository.QuotationRepositoryImpl
+import com.jorgemeza.medidaexacta.quotation.domain.pdf.IQuotationPdfGenerator
 import com.jorgemeza.medidaexacta.quotation.domain.repository.IQuotationRepository
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.AddQuotationUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.DeleteQuotationUseCase
-import com.jorgemeza.medidaexacta.quotation.domain.usecase.GeneratePdfUseCase
+import com.jorgemeza.medidaexacta.quotation.domain.usecase.GenerateQuotationPdfUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationDetailUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationByIdUseCase
@@ -41,6 +42,12 @@ object QuotationModule {
         detailDao: DetailDao
     ): IQuotationRepository {
         return QuotationRepositoryImpl(detailApi, quotationApi, quotationDao, detailDao)
+    }
+
+    @Provides
+    @Singleton
+    fun providePdfGenerator(@ApplicationContext context: Context): IQuotationPdfGenerator {
+        return QuotationPdfGeneratorImpl(context)
     }
 
     @Provides
@@ -88,8 +95,8 @@ object QuotationModule {
 
     @Provides
     @Singleton
-    fun provideGeneratePdfUseCase(@ApplicationContext context: Context): GeneratePdfUseCase {
-        return GeneratePdfUseCase(context)
+    fun provideGeneratePdfUseCase(pdfGenerator: IQuotationPdfGenerator): GenerateQuotationPdfUseCase {
+        return GenerateQuotationPdfUseCase(pdfGenerator)
     }
 
     @Provides

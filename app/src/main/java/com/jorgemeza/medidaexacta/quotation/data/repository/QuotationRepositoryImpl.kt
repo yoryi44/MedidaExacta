@@ -1,6 +1,5 @@
 package com.jorgemeza.medidaexacta.quotation.data.repository
 
-import com.jorgemeza.medidaexacta.client.data.local.ClientDao
 import com.jorgemeza.medidaexacta.core.util.resultOf
 import com.jorgemeza.medidaexacta.quotation.data.local.QuotationDao
 import com.jorgemeza.medidaexacta.quotation.data.mapper.toDomain
@@ -11,11 +10,11 @@ import com.jorgemeza.medidaexacta.quotation.data.remote.IQuotationApi
 import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
 import com.jorgemeza.medidaexacta.quotation.domain.repository.IQuotationRepository
-import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toDetailDomain
-import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toDomain
-import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toDto
-import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toEntity
-import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toSyncEntity
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDetailDomain
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDomain
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDto
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toEntity
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toSyncEntity
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
 import kotlinx.coroutines.flow.Flow
@@ -56,7 +55,7 @@ class QuotationRepositoryImpl(
         return quotationDao.getQuotationById(id).toDomain()
     }
 
-    override suspend fun addQuotationUseCase(quotation: QuotationModel) {
+    override suspend fun addQuotation(quotation: QuotationModel) {
         quotationDao.insertQuotation(quotation.toEntity())
         resultOf {
             quotationApi.inserQuotation(quotation.toDto())
@@ -65,7 +64,7 @@ class QuotationRepositoryImpl(
         }
     }
 
-    override suspend fun addDetailUseCase(detail: DetailModel) {
+    override suspend fun addDetail(detail: DetailModel) {
         detailDao.insertQuotationDetail(detail.toEntity())
         resultOf {
             detailApi.inserDetail(detail.toDto())
@@ -88,7 +87,7 @@ class QuotationRepositoryImpl(
         return quotationDao.getQuotationConsecutive()
     }
 
-    override suspend fun deleteQuotationDetailUseCase(id: String) : Result<Unit> {
+    override suspend fun deleteQuotationDetail(id: String) : Result<Unit> {
         return resultOf {
             detailDao.deleteQuotationDetailById(id)
         }.onSuccess {
@@ -100,7 +99,7 @@ class QuotationRepositoryImpl(
         }
     }
 
-    override suspend fun deleteQuotationUseCase(id: String): Result<Unit> {
+    override suspend fun deleteQuotation(id: String): Result<Unit> {
         return resultOf {
             quotationApi.deleteQuotationById(id)
         }.onSuccess {

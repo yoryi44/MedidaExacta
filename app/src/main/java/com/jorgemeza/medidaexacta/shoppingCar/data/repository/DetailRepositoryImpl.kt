@@ -2,10 +2,10 @@ package com.jorgemeza.medidaexacta.shoppingCar.data.repository
 
 import com.jorgemeza.medidaexacta.core.util.resultOf
 import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
-import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toDomain
-import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toDto
-import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toEntity
-import com.jorgemeza.medidaexacta.shoppingCar.data.Mapper.toSyncEntity
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDomain
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDto
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toEntity
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toSyncEntity
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
 import com.jorgemeza.medidaexacta.shoppingCar.domain.repository.IDetailRepository

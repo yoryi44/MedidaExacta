@@ -1,4 +1,4 @@
-package com.jorgemeza.medidaexacta.shoppingCar.data.Mapper
+package com.jorgemeza.medidaexacta.shoppingCar.data.mapper
 
 import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.DetailSyncEntity

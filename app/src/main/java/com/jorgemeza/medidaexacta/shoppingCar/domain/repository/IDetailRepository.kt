@@ -1,8 +1,6 @@
 package com.jorgemeza.medidaexacta.shoppingCar.domain.repository
 
 import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
-import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
-import kotlinx.coroutines.flow.Flow
 
 interface IDetailRepository {
 

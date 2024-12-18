@@ -1,4 +1,4 @@
-package com.jorgemeza.medidaexacta.quotation.domain.usecase
+package com.jorgemeza.medidaexacta.quotation.data.pdf
 
 import android.content.Context
 import android.content.Intent
@@ -18,19 +18,19 @@ import com.jorgemeza.medidaexacta.client.domain.model.ClientModel
 import com.jorgemeza.medidaexacta.core.ext.toPrice
 import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.jorgemeza.medidaexacta.quotation.domain.pdf.IQuotationPdfGenerator
 import java.io.File
 import java.io.IOException
 
-class GeneratePdfUseCase(
+class QuotationPdfGeneratorImpl(
     private val context: Context
-) {
-    suspend operator fun invoke(
-        client: ClientModel,
+) : IQuotationPdfGenerator {
+
+    override suspend fun pdfGenerator(
         quotation: QuotationModel,
+        client: ClientModel,
         detail: List<DetailModel>
-    ) = withContext(Dispatchers.Default) {
+    ) {
         try {
 
             var subtotal : Double = 0.0
@@ -43,7 +43,7 @@ class GeneratePdfUseCase(
             val pdfDocument = PdfDocument(pdfWriter)
             val document = Document(pdfDocument)
 
-            val title = Paragraph("PRESUPUESTO Nº${quotation.quotationNumber}").setTextAlignment(
+            val title = Paragraph("Presupuesto Nº${quotation.quotationNumber}").setTextAlignment(
                 TextAlignment.CENTER
             ).setFontSize(20f).setBold()
             document.add(title)
@@ -77,7 +77,7 @@ class GeneratePdfUseCase(
             }
 
             detail.forEach {
-                val value = it.price.toDouble() * it.amount.toInt();
+                val value = it.price.toDouble() * it.amount.toInt()
                 var cell =
                     Cell().add(Paragraph(it.product)).setTextAlignment(TextAlignment.LEFT)
                         .setVerticalAlignment(VerticalAlignment.MIDDLE).setPadding(5f)
@@ -157,4 +157,5 @@ class GeneratePdfUseCase(
             println("Error al crear el PDF: ${e.message}")
         }
     }
+
 }

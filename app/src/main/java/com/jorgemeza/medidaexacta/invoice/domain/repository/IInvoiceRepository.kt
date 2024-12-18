@@ -10,6 +10,7 @@ interface IInvoiceRepository {
     suspend fun getInvoiceBySearch(search: String): List<InvoiceModel>
     suspend fun addInvoice(invoice: InvoiceModel)
     suspend fun deleteInvoice(id: String): Result<Unit>
+    suspend fun getInvoiceConsecutive(): String
     suspend fun syncInvoice()
 
 }

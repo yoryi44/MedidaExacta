@@ -83,6 +83,8 @@ protolite-well-known-types = { group = "com.google.firebase", name = "protolite-
 #NAVIGATION  COMPOSE (NAV HOST)
 nav-host = { module = "androidx.navigation:navigation-compose",version.ref = "nav_version" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+
+#FIREBASE
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 
 #ROOM DATABASE

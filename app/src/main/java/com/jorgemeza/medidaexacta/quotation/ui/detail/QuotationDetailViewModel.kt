@@ -7,10 +7,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgemeza.medidaexacta.client.domain.usecase.GetAllClientUseCase
+import com.jorgemeza.medidaexacta.invoice.domain.model.InvoiceModel
+import com.jorgemeza.medidaexacta.invoice.domain.usecase.AddInvoiceUseCase
+import com.jorgemeza.medidaexacta.invoice.domain.usecase.GetInvoiceConsecutiveUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.AddQuotationUseCase
-import com.jorgemeza.medidaexacta.quotation.domain.usecase.GeneratePdfUseCase
-import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationDetailUseCase
+import com.jorgemeza.medidaexacta.quotation.domain.usecase.GenerateQuotationPdfUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationByIdUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationConsecutiveUseCase
 import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.GetDetailByIdUseCase
@@ -29,13 +31,16 @@ class QuotationDetailViewModel @Inject constructor(
     private val getQuotationByIdUseCase: GetQuotationByIdUseCase,
     private val getQuotationDetailByIdUseCase: GetDetailByIdUseCase,
     private val getAllClientsUseCase: GetAllClientUseCase,
-    private val generatePdfUseCase: GeneratePdfUseCase,
-    private val getQuotationConsecutiveUseCase: GetQuotationConsecutiveUseCase
+    private val generatePdfUseCase: GenerateQuotationPdfUseCase,
+    private val getQuotationConsecutiveUseCase: GetQuotationConsecutiveUseCase,
+    private val addInvoiceUseCase: AddInvoiceUseCase,
+    private val getInvoiceConsecutiveUseCase: GetInvoiceConsecutiveUseCase
 ) : ViewModel() {
 
     lateinit var quotation: QuotationModel
 
     private var pdfJob: Job? = null
+    private var quotaionJob: Job? = null
 
     var state by mutableStateOf(QuotationDetailState())
         private set
@@ -59,10 +64,41 @@ class QuotationDetailViewModel @Inject constructor(
             QuotationDetailEvent.OnDismissDialog -> {
                 state = state.copy(
                     error = null,
+                    invoice = false
                 )
             }
 
+            QuotationDetailEvent.OnInvoice -> {
+                state = state.copy(
+                    invoice = true
+                )
+            }
+            QuotationDetailEvent.OnSaveInvoice -> {
+                saveInvoice()
+            }
         }
+    }
+
+    private fun saveInvoice() {
+        viewModelScope.launch {
+            state = state.copy(
+                isLoading = true,
+                invoice = false
+            )
+            val invoiceNumber = getInvoiceConsecutiveUseCase()
+            val invoice = InvoiceModel(
+                id = UUID.randomUUID().toString(),
+                client = state.clients.firstOrNull { it.name == state.client }!!.id,
+                quotation = quotation.id,
+                invoiceNumber = invoiceNumber,
+                date = LocalDate.now().toString()
+            )
+
+            addInvoiceUseCase(invoice)
+        }
+        state = state.copy(
+            isSaveSuccessful = true
+        )
     }
 
     private fun saveQuotation() {
@@ -114,7 +150,8 @@ class QuotationDetailViewModel @Inject constructor(
 
     fun getQuotationById(quotationId: String) {
 
-        viewModelScope.launch {
+        quotaionJob?.cancel()
+        quotaionJob = viewModelScope.launch {
 
             state = state.copy(
                 isLoading = true
@@ -138,16 +175,10 @@ class QuotationDetailViewModel @Inject constructor(
     }
 
     private fun loadInitialData() {
-
         viewModelScope.launch{
-            state = state.copy(
-                isLoading = true
-            )
-
             getAllClientsUseCase().collect { clients ->
                 state = state.copy(
-                    clients = clients,
-                    isLoading = false
+                    clients = clients
                 )
             }
         }

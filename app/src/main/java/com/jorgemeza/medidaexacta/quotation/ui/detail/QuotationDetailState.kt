@@ -13,5 +13,6 @@ data class QuotationDetailState(
     val date : String = "",
     val isSaveSuccessful : Boolean = false,
     val error : String? = null,
+    val invoice : Boolean = false,
     val isLoading: Boolean = false
 )

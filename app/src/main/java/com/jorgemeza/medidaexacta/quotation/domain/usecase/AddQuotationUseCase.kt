@@ -9,6 +9,6 @@ class AddQuotationUseCase(
     private val quotationRepository: IQuotationRepository
 ) {
     suspend operator fun invoke(quotation: QuotationModel) = withContext(Dispatchers.IO) {
-        quotationRepository.addQuotationUseCase(quotation)
+        quotationRepository.addQuotation(quotation)
     }
 }

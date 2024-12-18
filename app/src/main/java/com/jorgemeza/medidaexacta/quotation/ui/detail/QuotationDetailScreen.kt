@@ -31,6 +31,7 @@ import com.jorgemeza.medidaexacta.core.ui.TextFieldComponent
 import com.jorgemeza.medidaexacta.quotation.ui.detail.components.ListQuotationDetailComponent
 import com.jorgemeza.medidaexacta.ui.theme.Danger
 import com.jorgemeza.medidaexacta.ui.theme.Success
+import com.jorgemeza.medidaexacta.ui.theme.Warning
 
 @Composable
 fun QuotationDetailScreen(
@@ -75,6 +76,21 @@ fun QuotationDetailScreen(
                 },
                 onConfirm = {
                     quotationDetailViewModel.onEvent(QuotationDetailEvent.OnDismissDialog)
+                }
+            )
+        }
+
+        if (state.invoice) {
+            AlertDialogComponent(
+                icon = Icons.Default.Warning,
+                title = "Invoice",
+                message = "Are you sure about converting this quote into an invoice?",
+                iconColor = Warning,
+                onDismiss = {
+                    quotationDetailViewModel.onEvent(QuotationDetailEvent.OnDismissDialog)
+                },
+                onConfirm = {
+                    quotationDetailViewModel.onEvent(QuotationDetailEvent.OnSaveInvoice)
                 }
             )
         }
@@ -173,6 +189,10 @@ fun QuotationDetailScreen(
 
                     ButtonComponent(modifier = Modifier.weight(1f), text = "Shop", color = Success) {
                         onShoppingCar(state.id, state.quotationNumber)
+                    }
+
+                    ButtonComponent(modifier = Modifier.weight(1f), text = "Invoice", color = Warning) {
+                        quotationDetailViewModel.onEvent(QuotationDetailEvent.OnInvoice)
                     }
                 }
             }

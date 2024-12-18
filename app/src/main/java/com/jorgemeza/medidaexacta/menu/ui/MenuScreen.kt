@@ -21,8 +21,6 @@ import com.jorgemeza.medidaexacta.menu.ui.models.MenuItem
 import com.jorgemeza.medidaexacta.navigation.Client
 import com.jorgemeza.medidaexacta.navigation.Invoice
 import com.jorgemeza.medidaexacta.navigation.Quotation
-import com.jorgemeza.medidaexacta.ui.theme.LigthGray
-import com.jorgemeza.medidaexacta.ui.theme.WarmGray
 
 @Composable
 fun MenuScreeen(

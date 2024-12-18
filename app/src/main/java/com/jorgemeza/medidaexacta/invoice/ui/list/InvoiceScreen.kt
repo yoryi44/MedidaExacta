@@ -58,7 +58,7 @@ fun InvoiceScreen(
                 ) {
                     items(state.invoices) { item ->
                         InvoiceItemComponent(invoice = item,
-                            onClickItem = {onDetail(item.quotation)},
+                            onClickItem = {onDetail(item.id)},
                             onLongClick = {}
                         )
                     }
