@@ -24,10 +24,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 
 class QuotationRepositoryImpl(
-    private val detailApi: IDetailApi,
     private val quotationApi: IQuotationApi,
     private val quotationDao: QuotationDao,
-    private val detailDao: DetailDao
 ) : IQuotationRepository {
 
     override suspend fun getAllQuotation(): Flow<List<QuotationModel>> {
@@ -44,11 +42,17 @@ class QuotationRepositoryImpl(
         return localFlow.combine(apiFlow) { db, api -> db }
     }
 
-    override suspend fun getAllQuotationDetail() {
-        resultOf {
-            var response = detailApi.getAllQuotationDetail().toDetailDomain()
-            insertDetail(response)
-        }
+    override suspend fun getAllQuotationMain() : Boolean {
+
+        val local = quotationDao.getAllQuotationMain()
+            .map { quotation ->
+                quotation.toDomain()
+            }
+
+        val api = getQuotationFormApiMain()
+
+        return local.isEmpty() && api.isEmpty()
+
     }
 
     override suspend fun getQuotationById(id: String): QuotationModel {
@@ -64,39 +68,8 @@ class QuotationRepositoryImpl(
         }
     }
 
-    override suspend fun addDetail(detail: DetailModel) {
-        detailDao.insertQuotationDetail(detail.toEntity())
-        resultOf {
-            detailApi.inserDetail(detail.toDto())
-        }.onFailure {
-            detailDao.insertDetailSync(detail.toSyncEntity())
-        }
-    }
-
-    override suspend fun getDetailById(id: String): List<DetailModel> {
-        return detailDao.getDetailById(id).map {
-            it.toDomain()
-        }
-    }
-
-    override suspend fun getProductById(id: String): DetailModel {
-        return detailDao.getQuotationDetailProductById(id).toDomain()
-    }
-
     override suspend fun getQuotationConsecutive(): String {
         return quotationDao.getQuotationConsecutive()
-    }
-
-    override suspend fun deleteQuotationDetail(id: String) : Result<Unit> {
-        return resultOf {
-            detailDao.deleteQuotationDetailById(id)
-        }.onSuccess {
-            detailDao.deleteQuotationDetailById(id)
-            detailDao.deleteQuotationDetailSyncById(id)
-            Result.success(Unit)
-        }.onFailure {
-            Result.failure<Unit>(it)
-        }
     }
 
     override suspend fun deleteQuotation(id: String): Result<Unit> {
@@ -130,15 +103,16 @@ class QuotationRepositoryImpl(
         }
     }
 
+    private suspend fun getQuotationFormApiMain(): List<QuotationModel> {
+        var response = quotationApi.getAllQuotation().toDomain()
+        insertQuotation(response)
+        return response
+    }
+
     private suspend fun insertQuotation(quotations: List<QuotationModel>) {
         quotations.forEach {
             quotationDao.insertQuotation(it.toEntity())
         }
     }
 
-    private suspend fun insertDetail(details: List<DetailModel>) {
-        details.forEach {
-            detailDao.insertQuotationDetail(it.toEntity())
-        }
-    }
 }

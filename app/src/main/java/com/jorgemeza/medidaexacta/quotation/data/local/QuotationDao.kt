@@ -1,9 +1,11 @@
 package com.jorgemeza.medidaexacta.quotation.data.local
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.jorgemeza.medidaexacta.client.data.local.entity.ClientSyncEntity
 import com.jorgemeza.medidaexacta.quotation.data.local.entity.QuotationEntity
 import com.jorgemeza.medidaexacta.quotation.data.local.entity.QuotationSyncEntity
 import kotlinx.coroutines.flow.Flow
@@ -14,8 +16,14 @@ interface QuotationDao {
     @Query("SELECT q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id ORDER BY date,name DESC")
     fun getAllQuotation(): Flow<List<QuotationEntity>>
 
+    @Query("SELECT q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id ORDER BY date,name DESC")
+    fun getAllQuotationMain(): List<QuotationEntity>
+
     @Query("SELECT q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id WHERE q.id = :id")
     suspend fun getQuotationById(id: String): QuotationEntity
+
+    @Query("SELECT * FROM QuotationEntity WHERE id = :id")
+    suspend fun getQuotationByIdSync(id: String): QuotationEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertQuotationSync(quotationSyncEntity: QuotationSyncEntity)
@@ -40,5 +48,11 @@ interface QuotationDao {
             "OR name LIKE '%' || :search || '%' " +
             "ORDER BY date ASC")
     fun getQuotationBySearch(search: String): List<QuotationEntity>
+
+    @Delete
+    suspend fun deleteQuotationSync(quotationSyncEntity: QuotationSyncEntity)
+
+    @Query("SELECT * FROM QuotationSyncEntity")
+    fun getAllQuotationSync(): List<QuotationSyncEntity>
 
 }

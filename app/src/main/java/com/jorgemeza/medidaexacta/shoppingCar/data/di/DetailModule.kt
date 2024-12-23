@@ -8,9 +8,11 @@ import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
 import com.jorgemeza.medidaexacta.invoice.data.pdf.InvoicePdfGeneratorImpl
 import com.jorgemeza.medidaexacta.shoppingCar.data.repository.DetailRepositoryImpl
 import com.jorgemeza.medidaexacta.invoice.domain.pdf.IInvoicePdfGenerator
+import com.jorgemeza.medidaexacta.quotation.domain.repository.IQuotationRepository
 import com.jorgemeza.medidaexacta.shoppingCar.domain.repository.IDetailRepository
 import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.AddDetailUseCase
 import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.DeleteDetailUseCase
+import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.GetAllQuotationDetailUseCase
 import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.GetDetailByIdUseCase
 import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.GetDetailProductByIdUseCase
 import dagger.Module
@@ -71,6 +73,12 @@ object DetailModule {
     @Singleton
     fun provideDeleteDetailUseCase(detailRepository: IDetailRepository): DeleteDetailUseCase {
         return DeleteDetailUseCase(detailRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetAllQuotationDetailUseCase(detailRepository: IDetailRepository): GetAllQuotationDetailUseCase {
+        return GetAllQuotationDetailUseCase(detailRepository)
     }
 
 }

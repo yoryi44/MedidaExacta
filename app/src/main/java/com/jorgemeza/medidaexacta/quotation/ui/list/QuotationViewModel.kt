@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.DeleteQuotationUseCase
-import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationDetailUseCase
+import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.GetAllQuotationDetailUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationBySearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

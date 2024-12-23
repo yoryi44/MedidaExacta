@@ -30,7 +30,7 @@ fun MenuScreeen(
 
     val menuItems = listOf(
         MenuItem(item = "Clientes", icon = Icons.Default.AccountCircle, navigate = Client),
-        MenuItem(item = "Cotizaciones", icon = Icons.Default.DateRange, navigate = Quotation),
+        MenuItem(item = "Presupuestos", icon = Icons.Default.DateRange, navigate = Quotation),
         MenuItem(item = "Facturas", icon = Icons.Default.ShoppingCart, navigate = Invoice),
     )
 

@@ -1,6 +1,7 @@
 package com.jorgemeza.medidaexacta.shoppingCar.data.local
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -11,19 +12,22 @@ import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.QuotationDetailE
 interface DetailDao {
 
     @Query("SELECT * FROM QuotationDetailEntity WHERE quotation = :quotation")
-    suspend fun getDetailById(quotation: String): List<QuotationDetailEntity>
+    suspend fun getDetailByQuotationId(quotation: String): List<QuotationDetailEntity>
+
+    @Query("SELECT * FROM QuotationDetailEntity WHERE id = :id")
+    suspend fun getDetailById(id: String): QuotationDetailEntity
 
     @Query("SELECT * FROM QuotationDetailEntity WHERE id = :detail")
-    suspend fun getQuotationDetailProductById(detail: String): QuotationDetailEntity
+    suspend fun getDetailProductById(detail: String): QuotationDetailEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDetailSync(detailSyncEntity: DetailSyncEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertQuotationDetail(quotationDetail: QuotationDetailEntity)
+    suspend fun insertDetail(quotationDetail: QuotationDetailEntity)
 
     @Query("DELETE FROM QuotationDetailEntity WHERE id = :id")
-    fun deleteQuotationDetailById(id: String)
+    fun deleteDetailById(id: String)
 
     @Query("DELETE FROM QuotationEntity WHERE id = :id")
     fun deleteQuotationById(id: String)
@@ -31,5 +35,10 @@ interface DetailDao {
     @Query("DELETE FROM DetailSyncEntity WHERE id = :id")
     fun deleteQuotationDetailSyncById(id: String)
 
+    @Query("SELECT * FROM DetailSyncEntity")
+    fun getAllDetailSync(): List<DetailSyncEntity>
+
+    @Delete
+    suspend fun deleteDetailSync(detailSyncEntity: DetailSyncEntity)
 
 }

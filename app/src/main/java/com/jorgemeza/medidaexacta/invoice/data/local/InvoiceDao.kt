@@ -1,11 +1,13 @@
 package com.jorgemeza.medidaexacta.invoice.data.local
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.jorgemeza.medidaexacta.invoice.data.local.entity.InvoiceEntity
 import com.jorgemeza.medidaexacta.invoice.data.local.entity.InvoiceSyncEntity
+import com.jorgemeza.medidaexacta.quotation.data.local.entity.QuotationSyncEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -42,5 +44,11 @@ interface InvoiceDao {
 //            "OR name LIKE '%' || :search || '%' " +
 //            "ORDER BY date ASC")
 //    fun getQuotationBySearch(search: String): List<QuotationEntity>
+
+    @Delete
+    suspend fun deleteInvoiceSync(invoiceSyncEntity: InvoiceSyncEntity)
+
+    @Query("SELECT * FROM InvoiceSyncEntity")
+    fun getAllInvoiceSync(): List<InvoiceSyncEntity>
 
 }

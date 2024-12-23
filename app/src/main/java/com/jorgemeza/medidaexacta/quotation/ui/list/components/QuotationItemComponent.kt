@@ -61,7 +61,7 @@ fun QuotationItemComponent(
                 Icons.Default.DateRange,
                 contentDescription = "",
                 Modifier.size(80.dp),
-                tint = if(quotation.price.isEmpty()) Danger else Color.Black
+                tint = if(quotation.price.isEmpty() || quotation.price == "0.0") Danger else Color.Black
             )
             Column {
 

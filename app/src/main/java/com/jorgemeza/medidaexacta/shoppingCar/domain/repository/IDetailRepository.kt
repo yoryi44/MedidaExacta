@@ -4,9 +4,10 @@ import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 
 interface IDetailRepository {
 
-    suspend fun addDetailUseCase(detail: DetailModel)
+    suspend fun addDetail(detail: DetailModel)
     suspend fun getDetailById(id: String): List<DetailModel>
     suspend fun getProductById(id: String): DetailModel
-    suspend fun deleteQuotationDetailUseCase(id: String): Result<Unit>
+    suspend fun deleteDetail(id: String): Result<Unit>
+    suspend fun getAllDetail()
 
 }

@@ -12,13 +12,11 @@ import com.jorgemeza.medidaexacta.quotation.domain.repository.IQuotationReposito
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.AddQuotationUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.DeleteQuotationUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GenerateQuotationPdfUseCase
-import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationDetailUseCase
+import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationMainUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationByIdUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationBySearchUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationConsecutiveUseCase
-import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
-import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,12 +34,10 @@ object QuotationModule {
     @Provides
     @Singleton
     fun provideQuotationRepository(
-        detailApi: IDetailApi,
         quotationApi: IQuotationApi,
         quotationDao: QuotationDao,
-        detailDao: DetailDao
     ): IQuotationRepository {
-        return QuotationRepositoryImpl(detailApi, quotationApi, quotationDao, detailDao)
+        return QuotationRepositoryImpl( quotationApi, quotationDao)
     }
 
     @Provides
@@ -83,12 +79,6 @@ object QuotationModule {
 
     @Provides
     @Singleton
-    fun provideGetAllQuotationDetailUseCase(quotationRepository: IQuotationRepository): GetAllQuotationDetailUseCase {
-        return GetAllQuotationDetailUseCase(quotationRepository)
-    }
-
-    @Provides
-    @Singleton
     fun provideDeleteQuotationUseCase(quotationRepository: IQuotationRepository): DeleteQuotationUseCase {
         return DeleteQuotationUseCase(quotationRepository)
     }
@@ -107,8 +97,14 @@ object QuotationModule {
 
     @Provides
     @Singleton
-    fun providesGetQuotationBySearchUseCase(quotationRepository: IQuotationRepository): GetQuotationBySearchUseCase {
+    fun provideGetQuotationBySearchUseCase(quotationRepository: IQuotationRepository): GetQuotationBySearchUseCase {
         return GetQuotationBySearchUseCase(quotationRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetAllQuotationMainUseCase(quotationRepository: IQuotationRepository): GetAllQuotationMainUseCase {
+        return GetAllQuotationMainUseCase(quotationRepository)
     }
 
 }

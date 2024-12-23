@@ -8,6 +8,7 @@ import com.jorgemeza.medidaexacta.client.data.repository.ClientRepositoryImpl
 import com.jorgemeza.medidaexacta.client.domain.repository.IClientRepository
 import com.jorgemeza.medidaexacta.client.domain.usecase.AddClientUseCase
 import com.jorgemeza.medidaexacta.client.domain.usecase.DeleteClientUseCase
+import com.jorgemeza.medidaexacta.client.domain.usecase.GetAllClientMainUseCase
 import com.jorgemeza.medidaexacta.client.domain.usecase.GetAllClientUseCase
 import com.jorgemeza.medidaexacta.client.domain.usecase.GetClientByIdUseCase
 import com.jorgemeza.medidaexacta.client.domain.usecase.GetClientBySearchUseCase
@@ -96,6 +97,12 @@ object ClientModule {
     @Provides
     fun provideWorkManager(@ApplicationContext context: Context): WorkManager {
         return WorkManager.getInstance(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetAllientMainUseCase(clientRepository: IClientRepository) : GetAllClientMainUseCase {
+        return GetAllClientMainUseCase(clientRepository)
     }
 
 }

@@ -20,7 +20,7 @@ import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
         QuotationEntity::class, QuotationSyncEntity::class,
         QuotationDetailEntity::class, DetailSyncEntity::class,
         InvoiceEntity::class, InvoiceSyncEntity::class],
-    version = 2
+    version = 1
 )
 abstract class MedidaExactaDataBase : RoomDatabase() {
     abstract val clientDao: ClientDao

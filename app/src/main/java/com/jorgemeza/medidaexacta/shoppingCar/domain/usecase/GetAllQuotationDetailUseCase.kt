@@ -1,14 +1,13 @@
 package com.jorgemeza.medidaexacta.shoppingCar.domain.usecase
 
-import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.shoppingCar.domain.repository.IDetailRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class AddDetailUseCase(
+class GetAllQuotationDetailUseCase(
     private val detailRepository: IDetailRepository
 ) {
-    suspend operator fun invoke(detail: DetailModel) = withContext(Dispatchers.IO) {
-        detailRepository.addDetail(detail)
+    suspend operator fun invoke() = withContext(Dispatchers.IO) {
+        detailRepository.getAllDetail()
     }
 }

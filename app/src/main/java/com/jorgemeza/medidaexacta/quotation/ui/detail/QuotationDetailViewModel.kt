@@ -169,9 +169,7 @@ class QuotationDetailViewModel @Inject constructor(
                 date = quotation.date,
                 isLoading = false
             )
-
         }
-
     }
 
     private fun loadInitialData() {

@@ -40,6 +40,16 @@ class ClientRepositoryImpl(
         return localFlow.combine(apiFlow) { db, api -> db }
     }
 
+    override suspend fun getAllClientMain(): Boolean {
+
+        val local = clientDao.getAllClientMain()
+            .map { client -> client.toDomain() }
+
+        val api = getClientFormApiMain()
+
+        return local.isEmpty() && api.isEmpty()
+    }
+
     override suspend fun getClientById(id: String): ClientModel {
         return clientDao.getClientById(id).toDomain()
     }
@@ -90,6 +100,12 @@ class ClientRepositoryImpl(
         }.onStart {
             emit(emptyList())
         }
+    }
+
+    private suspend fun getClientFormApiMain(): List<ClientModel> {
+        val response = clientApi.getAllClient().toDomain()
+        insertClient(response)
+        return response
     }
 
     private suspend fun insertClient(client: List<ClientModel>) {

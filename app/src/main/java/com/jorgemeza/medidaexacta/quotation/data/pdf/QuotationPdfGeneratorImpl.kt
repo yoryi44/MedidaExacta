@@ -2,14 +2,19 @@ package com.jorgemeza.medidaexacta.quotation.data.pdf
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Environment
 import androidx.core.content.FileProvider
+import com.itextpdf.io.image.ImageDataFactory
+import com.itextpdf.io.source.ByteArrayOutputStream
 import com.itextpdf.kernel.colors.ColorConstants
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.borders.Border
 import com.itextpdf.layout.element.Cell
+import com.itextpdf.layout.element.Image
 import com.itextpdf.layout.element.Paragraph
 import com.itextpdf.layout.element.Table
 import com.itextpdf.layout.properties.TextAlignment
@@ -42,6 +47,21 @@ class QuotationPdfGeneratorImpl(
             val pdfWriter = PdfWriter(filePath)
             val pdfDocument = PdfDocument(pdfWriter)
             val document = Document(pdfDocument)
+
+            val bitmap = BitmapFactory.decodeResource(context.resources,context.resources.getIdentifier("ic_launcher_background_png", "drawable", context.packageName))
+            val stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            val imageBytes = stream.toByteArray()
+
+            val imagen = Image(
+                ImageDataFactory.create(imageBytes)
+            )
+
+            imagen.setWidth(200f)
+            imagen.setHeight(200f)
+            imagen.setFixedPosition(20f, 750f) // Coordenadas (x, y)
+
+            document.add(imagen)
 
             val title = Paragraph("Presupuesto Nº${quotation.quotationNumber}").setTextAlignment(
                 TextAlignment.CENTER

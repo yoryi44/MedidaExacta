@@ -179,20 +179,24 @@ fun QuotationDetailScreen(
 
                 if (!state.id.isNullOrEmpty()) {
 
-                    ButtonComponent(
-                        modifier = Modifier.weight(1f),
-                        text = "Print",
-                        color = Danger
-                    ) {
-                        quotationDetailViewModel.onEvent(QuotationDetailEvent.OnPdf)
+                    if(!state.products.isEmpty())
+                    {
+                        ButtonComponent(
+                            modifier = Modifier.weight(1f),
+                            text = "Print",
+                            color = Danger
+                        ) {
+                            quotationDetailViewModel.onEvent(QuotationDetailEvent.OnPdf)
+                        }
+
+                        ButtonComponent(modifier = Modifier.weight(1f), text = "Invoice", color = Warning) {
+                            quotationDetailViewModel.onEvent(QuotationDetailEvent.OnInvoice)
+                        }
+
                     }
 
                     ButtonComponent(modifier = Modifier.weight(1f), text = "Shop", color = Success) {
                         onShoppingCar(state.id, state.quotationNumber)
-                    }
-
-                    ButtonComponent(modifier = Modifier.weight(1f), text = "Invoice", color = Warning) {
-                        quotationDetailViewModel.onEvent(QuotationDetailEvent.OnInvoice)
                     }
                 }
             }

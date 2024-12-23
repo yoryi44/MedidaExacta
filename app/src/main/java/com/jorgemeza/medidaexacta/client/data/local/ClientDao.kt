@@ -21,6 +21,9 @@ interface ClientDao {
     @Query("SELECT * FROM ClientEntity ORDER BY name ASC")
     fun getAllClient(): Flow<List<ClientEntity>>
 
+    @Query("SELECT * FROM ClientEntity ORDER BY name ASC")
+    fun getAllClientMain(): List<ClientEntity>
+
     @Query("SELECT * FROM ClientEntity WHERE name LIKE '%' || :search || '%' " +
             "OR phone LIKE '%' || :search || '%' OR email LIKE '%' || :search || '%' " +
             "ORDER BY name ASC")

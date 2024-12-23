@@ -8,6 +8,7 @@ import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toEntity
 import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toSyncEntity
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDetailDomain
 import com.jorgemeza.medidaexacta.shoppingCar.domain.repository.IDetailRepository
 
 class DetailRepositoryImpl(
@@ -15,8 +16,8 @@ class DetailRepositoryImpl(
     private val detailDao: DetailDao
 ) : IDetailRepository {
 
-    override suspend fun addDetailUseCase(detail: DetailModel) {
-        detailDao.insertQuotationDetail(detail.toEntity())
+    override suspend fun addDetail(detail: DetailModel) {
+        detailDao.insertDetail(detail.toEntity())
         resultOf {
             detailApi.inserDetail(detail.toDto())
         }.onFailure {
@@ -25,24 +26,37 @@ class DetailRepositoryImpl(
     }
 
     override suspend fun getDetailById(id: String): List<DetailModel> {
-        return detailDao.getDetailById(id).map {
+        return detailDao.getDetailByQuotationId(id).map {
             it.toDomain()
         }
     }
 
     override suspend fun getProductById(id: String): DetailModel {
-        return detailDao.getQuotationDetailProductById(id).toDomain()
+        return detailDao.getDetailProductById(id).toDomain()
     }
 
-    override suspend fun deleteQuotationDetailUseCase(id: String) : Result<Unit> {
+    override suspend fun deleteDetail(id: String) : Result<Unit> {
         return resultOf {
             detailApi.deleteQuotationDetailById(id)
         }.onSuccess {
-            detailDao.deleteQuotationDetailById(id)
+            detailDao.deleteDetailById(id)
             detailDao.deleteQuotationDetailSyncById(id)
             Result.success(Unit)
         }.onFailure {
             Result.failure<Unit>(it)
+        }
+    }
+
+    override suspend fun getAllDetail() {
+        resultOf {
+            var response = detailApi.getAllQuotationDetail().toDetailDomain()
+            insertDetail(response)
+        }
+    }
+
+    private suspend fun insertDetail(details: List<DetailModel>) {
+        details.forEach {
+            detailDao.insertDetail(it.toEntity())
         }
     }
 
