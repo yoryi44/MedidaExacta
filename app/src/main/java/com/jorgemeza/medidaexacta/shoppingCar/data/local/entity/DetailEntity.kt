@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class QuotationDetailEntity (
+data class DetailEntity (
     @PrimaryKey(autoGenerate = false)
     val id : String,
     val quotation: String,

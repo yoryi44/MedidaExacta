@@ -2,7 +2,7 @@ package com.jorgemeza.medidaexacta.shoppingCar.data.mapper
 
 import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.DetailSyncEntity
-import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.QuotationDetailEntity
+import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.DetailEntity
 import com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto.DetailDto
 import com.jorgemeza.medidaexacta.shoppingCar.data.remote.dto.DetailResponse
 
@@ -19,7 +19,7 @@ fun DetailResponse.toDetailDomain(): List<DetailModel> {
     }
 }
 
-fun QuotationDetailEntity.toDomain() : DetailModel {
+fun DetailEntity.toDomain() : DetailModel {
     return DetailModel(
         id = this.id,
         quotation = this.quotation,
@@ -29,8 +29,8 @@ fun QuotationDetailEntity.toDomain() : DetailModel {
     )
 }
 
-fun DetailModel.toEntity(): QuotationDetailEntity {
-    return QuotationDetailEntity(
+fun DetailModel.toEntity(): DetailEntity {
+    return DetailEntity(
         id = this.id,
         quotation = this.quotation,
         amount = this.amount,

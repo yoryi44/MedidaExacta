@@ -10,7 +10,7 @@ import com.jorgemeza.medidaexacta.invoice.data.local.entity.InvoiceEntity
 import com.jorgemeza.medidaexacta.invoice.data.local.entity.InvoiceSyncEntity
 import com.jorgemeza.medidaexacta.quotation.data.local.QuotationDao
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.DetailSyncEntity
-import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.QuotationDetailEntity
+import com.jorgemeza.medidaexacta.shoppingCar.data.local.entity.DetailEntity
 import com.jorgemeza.medidaexacta.quotation.data.local.entity.QuotationEntity
 import com.jorgemeza.medidaexacta.quotation.data.local.entity.QuotationSyncEntity
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
@@ -18,7 +18,7 @@ import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
 @Database(
     entities = [ClientEntity::class, ClientSyncEntity::class,
         QuotationEntity::class, QuotationSyncEntity::class,
-        QuotationDetailEntity::class, DetailSyncEntity::class,
+        DetailEntity::class, DetailSyncEntity::class,
         InvoiceEntity::class, InvoiceSyncEntity::class],
     version = 1
 )
