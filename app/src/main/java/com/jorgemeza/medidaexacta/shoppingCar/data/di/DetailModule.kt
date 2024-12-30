@@ -1,14 +1,10 @@
 package com.jorgemeza.medidaexacta.shoppingCar.data.di
 
-import android.content.Context
 import com.jorgemeza.medidaexacta.core.api.Api.BASE_URL
 import com.jorgemeza.medidaexacta.core.db.MedidaExactaDataBase
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
-import com.jorgemeza.medidaexacta.invoice.data.pdf.InvoicePdfGeneratorImpl
 import com.jorgemeza.medidaexacta.shoppingCar.data.repository.DetailRepositoryImpl
-import com.jorgemeza.medidaexacta.invoice.domain.pdf.IInvoicePdfGenerator
-import com.jorgemeza.medidaexacta.quotation.domain.repository.IQuotationRepository
 import com.jorgemeza.medidaexacta.shoppingCar.domain.repository.IDetailRepository
 import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.AddDetailUseCase
 import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.DeleteDetailUseCase
@@ -18,7 +14,6 @@ import com.jorgemeza.medidaexacta.shoppingCar.domain.usecase.GetDetailProductByI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

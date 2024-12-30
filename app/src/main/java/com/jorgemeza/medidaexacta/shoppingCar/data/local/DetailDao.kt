@@ -29,9 +29,6 @@ interface DetailDao {
     @Query("DELETE FROM DetailEntity WHERE id = :id")
     fun deleteDetailById(id: String)
 
-    @Query("DELETE FROM QuotationEntity WHERE id = :id")
-    fun deleteQuotationById(id: String)
-
     @Query("DELETE FROM DetailSyncEntity WHERE id = :id")
     fun deleteQuotationDetailSyncById(id: String)
 

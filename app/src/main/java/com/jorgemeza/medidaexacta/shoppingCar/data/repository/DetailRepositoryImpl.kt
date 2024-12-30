@@ -1,5 +1,6 @@
 package com.jorgemeza.medidaexacta.shoppingCar.data.repository
 
+import androidx.room.Transaction
 import com.jorgemeza.medidaexacta.core.util.resultOf
 import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDomain
@@ -35,9 +36,10 @@ class DetailRepositoryImpl(
         return detailDao.getDetailProductById(id).toDomain()
     }
 
+    @Transaction
     override suspend fun deleteDetail(id: String) : Result<Unit> {
         return resultOf {
-            detailApi.deleteQuotationDetailById(id)
+            detailApi.deleteDetailById(id)
         }.onSuccess {
             detailDao.deleteDetailById(id)
             detailDao.deleteQuotationDetailSyncById(id)

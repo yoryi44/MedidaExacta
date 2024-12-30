@@ -18,5 +18,5 @@ interface IDetailApi {
     suspend fun inserDetail(@Body detail: DetailResponse)
 
     @DELETE(DETAIL_DELETE_URL)
-    suspend fun deleteQuotationDetailById(@Path("detailId", encoded = true) detailId: String)
+    suspend fun deleteDetailById(@Path("detailId", encoded = true) detailId: String)
 }
