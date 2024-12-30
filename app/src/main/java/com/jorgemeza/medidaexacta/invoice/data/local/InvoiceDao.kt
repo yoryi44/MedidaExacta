@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.jorgemeza.medidaexacta.invoice.data.local.entity.InvoiceEntity
 import com.jorgemeza.medidaexacta.invoice.data.local.entity.InvoiceSyncEntity
-import com.jorgemeza.medidaexacta.quotation.data.local.entity.QuotationSyncEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -15,7 +14,7 @@ interface InvoiceDao {
 
     @Query("SELECT i.id,c.name as client,i.quotation,i.date,i.invoiceNumber " +
             "FROM InvoiceEntity i LEFT JOIN ClientEntity c ON i.client = c.id " +
-            "LEFT JOIN QuotationEntity q ON q.id = i.quotation ORDER BY i.date,invoiceNumber ASC")
+            "LEFT JOIN QuotationEntity q ON q.id = i.quotation ORDER BY i.date,CAST(invoiceNumber AS INTEGER) ASC")
     fun getAllInvocie(): Flow<List<InvoiceEntity>>
 
     @Query("SELECT * FROM InvoiceEntity WHERE id = :id")
@@ -36,7 +35,7 @@ interface InvoiceDao {
 //    @Query("DELETE FROM QuotationSyncEntity WHERE id = :id")
 //    fun deleteQuotationSyncByClient(id: String)
 
-    @Query("SELECT (MAX(invoiceNumber) +1) FROM InvoiceEntity")
+    @Query("SELECT (COALESCE(MAX(CAST(invoiceNumber AS INTEGER)), 0) + 1) FROM InvoiceEntity")
     suspend fun getInvoiceConsecutive(): String
 
 //    @Query("SELECT q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id WHERE client LIKE '%' || :search || '%' " +
