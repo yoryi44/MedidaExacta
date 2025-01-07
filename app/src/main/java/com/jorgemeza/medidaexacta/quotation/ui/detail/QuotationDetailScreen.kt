@@ -23,11 +23,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jorgemeza.medidaexacta.core.ui.AlertDialogComponent
-import com.jorgemeza.medidaexacta.core.ui.ButtonComponent
-import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
-import com.jorgemeza.medidaexacta.core.ui.SelectComponent
-import com.jorgemeza.medidaexacta.core.ui.TextFieldComponent
+import com.jorgemeza.ui.components.AlertDialogComponent
+import com.jorgemeza.ui.components.ButtonComponent
+import com.jorgemeza.ui.components.CircularProgresIndicatorComponent
+import com.jorgemeza.ui.components.SelectComponent
+import com.jorgemeza.ui.components.TextFieldComponent
 import com.jorgemeza.medidaexacta.quotation.ui.detail.components.ListQuotationDetailComponent
 import com.jorgemeza.medidaexacta.ui.theme.Danger
 import com.jorgemeza.medidaexacta.ui.theme.Success
@@ -66,7 +66,7 @@ fun QuotationDetailScreen(
     ) {
 
         if (!state.error.isNullOrBlank()) {
-            AlertDialogComponent(
+            com.jorgemeza.ui.components.AlertDialogComponent(
                 icon = Icons.Default.Warning,
                 title = "Error",
                 message = state.error,
@@ -81,7 +81,7 @@ fun QuotationDetailScreen(
         }
 
         if (state.invoice) {
-            AlertDialogComponent(
+            com.jorgemeza.ui.components.AlertDialogComponent(
                 icon = Icons.Default.Warning,
                 title = "Invoice",
                 message = "Are you sure about converting this quote into an invoice?",
@@ -96,9 +96,9 @@ fun QuotationDetailScreen(
         }
 
         if (state.isLoading) {
-            CircularProgresIndicatorComponent()
+            com.jorgemeza.ui.components.CircularProgresIndicatorComponent()
         } else {
-            TextFieldComponent(
+            com.jorgemeza.ui.components.TextFieldComponent(
                 enabled = false,
                 value = state.quotationNumber,
                 leadingIcon = Icons.Default.Info,
@@ -118,7 +118,7 @@ fun QuotationDetailScreen(
                 }),
             ) {}
 
-            TextFieldComponent(
+            com.jorgemeza.ui.components.TextFieldComponent(
                 enabled = false,
                 value = state.date,
                 leadingIcon = Icons.Default.DateRange,
@@ -138,7 +138,7 @@ fun QuotationDetailScreen(
                 }),
             ) {}
 
-            TextFieldComponent(
+            com.jorgemeza.ui.components.TextFieldComponent(
                 enabled = false,
                 value = state.price,
                 leadingIcon = Icons.Default.ShoppingCart,
@@ -158,7 +158,7 @@ fun QuotationDetailScreen(
                 }),
             ) {}
 
-            SelectComponent(
+            com.jorgemeza.ui.components.SelectComponent(
                 options = state.clients.map { it.name },
                 selected = state.client,
                 modifier = Modifier
@@ -173,7 +173,10 @@ fun QuotationDetailScreen(
 
             Row {
 
-                ButtonComponent(modifier = Modifier.weight(1f), text = "Save") {
+                com.jorgemeza.ui.components.ButtonComponent(
+                    modifier = Modifier.weight(1f),
+                    text = "Save"
+                ) {
                     quotationDetailViewModel.onEvent(QuotationDetailEvent.OnSave)
                 }
 
@@ -181,7 +184,7 @@ fun QuotationDetailScreen(
 
                     if(!state.products.isEmpty())
                     {
-                        ButtonComponent(
+                        com.jorgemeza.ui.components.ButtonComponent(
                             modifier = Modifier.weight(1f),
                             text = "Print",
                             color = Danger
@@ -189,13 +192,21 @@ fun QuotationDetailScreen(
                             quotationDetailViewModel.onEvent(QuotationDetailEvent.OnPdf)
                         }
 
-                        ButtonComponent(modifier = Modifier.weight(1f), text = "Invoice", color = Warning) {
+                        com.jorgemeza.ui.components.ButtonComponent(
+                            modifier = Modifier.weight(1f),
+                            text = "Invoice",
+                            color = Warning
+                        ) {
                             quotationDetailViewModel.onEvent(QuotationDetailEvent.OnInvoice)
                         }
 
                     }
 
-                    ButtonComponent(modifier = Modifier.weight(1f), text = "Shop", color = Success) {
+                    com.jorgemeza.ui.components.ButtonComponent(
+                        modifier = Modifier.weight(1f),
+                        text = "Shop",
+                        color = Success
+                    ) {
                         onShoppingCar(state.id, state.quotationNumber)
                     }
                 }

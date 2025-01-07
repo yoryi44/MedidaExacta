@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.jorgemeza.medidaexacta.core.util.resultOf
+import com.jorgemeza.data.util.resultOf
 import com.jorgemeza.medidaexacta.client.data.local.ClientDao
 import com.jorgemeza.medidaexacta.client.data.local.entity.ClientSyncEntity
 import com.jorgemeza.medidaexacta.client.data.mapper.toDomain

@@ -16,10 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jorgemeza.medidaexacta.client.ui.list.components.ClientItemComponent
-import com.jorgemeza.medidaexacta.core.ui.AlertDialogComponent
-import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
-import com.jorgemeza.medidaexacta.core.ui.FloatingActionButtonComponent
-import com.jorgemeza.medidaexacta.core.ui.TopBarComponent
+import com.jorgemeza.ui.components.AlertDialogComponent
+import com.jorgemeza.ui.components.CircularProgresIndicatorComponent
+import com.jorgemeza.ui.components.FloatingActionButtonComponent
+import com.jorgemeza.ui.components.TopBarComponent
+import com.jorgemeza.medidaexacta.ui.theme.Danger
 import com.jorgemeza.medidaexacta.ui.theme.LigthGray
 
 @Composable
@@ -32,7 +33,7 @@ fun ClientScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButtonComponent {
+            com.jorgemeza.ui.components.FloatingActionButtonComponent {
                 onDetail(null)
             }
         }
@@ -49,7 +50,7 @@ fun ClientScreen(
             ) {
 
                 if (!state.idClientDelete.isNullOrBlank()) {
-                    AlertDialogComponent(
+                    com.jorgemeza.ui.components.AlertDialogComponent(
                         icon = Icons.Default.Warning,
                         title = "Are you sure you want to delete the client?",
                         message = "Once deleted, you will not be able to recover the information.",
@@ -64,11 +65,11 @@ fun ClientScreen(
                 }
 
                 if(!state.error.isNullOrBlank()) {
-                    AlertDialogComponent(
+                    com.jorgemeza.ui.components.AlertDialogComponent(
                         icon = Icons.Default.Warning,
                         title = "Error",
                         message = state.error,
-                        iconColor = com.jorgemeza.medidaexacta.ui.theme.Danger,
+                        iconColor = Danger,
                         onDismiss = {
                             clientViewModel.onEvent(ClientEvent.OnDismissDialog)
                         },
@@ -78,7 +79,7 @@ fun ClientScreen(
                     )
                 }
 
-                TopBarComponent(value = state.searchQuery,
+                com.jorgemeza.ui.components.TopBarComponent(value = state.searchQuery,
                     onChange = {
                         clientViewModel.onEvent(ClientEvent.OnSearchQueryChange(it))
                     },
@@ -88,7 +89,7 @@ fun ClientScreen(
 
                 if(state.isLoading)
                 {
-                    CircularProgresIndicatorComponent()
+                    com.jorgemeza.ui.components.CircularProgresIndicatorComponent()
                 }
                 else
                 {

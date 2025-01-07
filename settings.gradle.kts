@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Medida Exacta"
 include(":app")
+include(":core")
+include(":core:ui")
+include(":core:data")

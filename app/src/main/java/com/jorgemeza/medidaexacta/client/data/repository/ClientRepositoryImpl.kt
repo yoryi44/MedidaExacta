@@ -16,7 +16,7 @@ import com.jorgemeza.medidaexacta.client.data.remote.IClientApi
 import com.jorgemeza.medidaexacta.client.data.sync.ClientSyncWorker
 import com.jorgemeza.medidaexacta.client.domain.model.ClientModel
 import com.jorgemeza.medidaexacta.client.domain.repository.IClientRepository
-import com.jorgemeza.medidaexacta.core.util.resultOf
+import com.jorgemeza.data.util.resultOf
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow

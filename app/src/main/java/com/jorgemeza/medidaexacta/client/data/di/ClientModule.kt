@@ -13,8 +13,8 @@ import com.jorgemeza.medidaexacta.client.domain.usecase.GetAllClientUseCase
 import com.jorgemeza.medidaexacta.client.domain.usecase.GetClientByIdUseCase
 import com.jorgemeza.medidaexacta.client.domain.usecase.GetClientBySearchUseCase
 import com.jorgemeza.medidaexacta.client.domain.usecase.SyncClientUseCase
-import com.jorgemeza.medidaexacta.core.api.Api.BASE_URL
-import com.jorgemeza.medidaexacta.core.db.MedidaExactaDataBase
+import com.jorgemeza.data.api.Api.BASE_URL
+import com.jorgemeza.medidaexacta.db.db.MedidaExactaDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,7 +47,7 @@ object ClientModule {
     @Provides
     @Singleton
     fun provideClientApi(client: OkHttpClient) : IClientApi {
-        return Retrofit.Builder().baseUrl(BASE_URL).client(client)
+        return Retrofit.Builder().baseUrl(com.jorgemeza.data.api.Api.BASE_URL).client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(IClientApi::class.java)

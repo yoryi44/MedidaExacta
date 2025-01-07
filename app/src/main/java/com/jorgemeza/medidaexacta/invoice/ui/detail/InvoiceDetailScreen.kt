@@ -22,11 +22,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jorgemeza.medidaexacta.core.ui.AlertDialogComponent
-import com.jorgemeza.medidaexacta.core.ui.ButtonComponent
-import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
-import com.jorgemeza.medidaexacta.core.ui.SelectComponent
-import com.jorgemeza.medidaexacta.core.ui.TextFieldComponent
+import com.jorgemeza.ui.components.AlertDialogComponent
+import com.jorgemeza.ui.components.ButtonComponent
+import com.jorgemeza.ui.components.CircularProgresIndicatorComponent
+import com.jorgemeza.ui.components.SelectComponent
+import com.jorgemeza.ui.components.TextFieldComponent
 import com.jorgemeza.medidaexacta.quotation.ui.detail.components.ListQuotationDetailComponent
 import com.jorgemeza.medidaexacta.ui.theme.Danger
 
@@ -52,7 +52,7 @@ fun InvoiceDetailScreen(
     ) {
 
         if (!state.error.isNullOrBlank()) {
-            AlertDialogComponent(
+            com.jorgemeza.ui.components.AlertDialogComponent(
                 icon = Icons.Default.Warning,
                 title = "Error",
                 message = state.error,
@@ -67,9 +67,9 @@ fun InvoiceDetailScreen(
         }
 
         if (state.isLoading) {
-            CircularProgresIndicatorComponent()
+            com.jorgemeza.ui.components.CircularProgresIndicatorComponent()
         } else {
-            TextFieldComponent(
+            com.jorgemeza.ui.components.TextFieldComponent(
                 enabled = false,
                 value = state.quotationNumber,
                 leadingIcon = Icons.Default.Info,
@@ -89,7 +89,7 @@ fun InvoiceDetailScreen(
                 }),
             ) {}
 
-            TextFieldComponent(
+            com.jorgemeza.ui.components.TextFieldComponent(
                 enabled = false,
                 value = state.date,
                 leadingIcon = Icons.Default.DateRange,
@@ -109,7 +109,7 @@ fun InvoiceDetailScreen(
                 }),
             ) {}
 
-            TextFieldComponent(
+            com.jorgemeza.ui.components.TextFieldComponent(
                 enabled = false,
                 value = state.price,
                 leadingIcon = Icons.Default.ShoppingCart,
@@ -129,7 +129,7 @@ fun InvoiceDetailScreen(
                 }),
             ) {}
 
-            SelectComponent(
+            com.jorgemeza.ui.components.SelectComponent(
                 options = state.clients.map { it.name },
                 selected = state.client,
                 modifier = Modifier
@@ -143,7 +143,7 @@ fun InvoiceDetailScreen(
             ListQuotationDetailComponent(modifier = Modifier.weight(1f), state.products)
 
 
-            ButtonComponent(
+            com.jorgemeza.ui.components.ButtonComponent(
                 text = "Print",
                 color = Danger
             ) {

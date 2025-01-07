@@ -13,8 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jorgemeza.medidaexacta.core.ui.FloatingActionButtonComponent
-import com.jorgemeza.medidaexacta.core.ui.TopBarComponent
+import com.jorgemeza.ui.components.FloatingActionButtonComponent
+import com.jorgemeza.ui.components.TopBarComponent
 import com.jorgemeza.medidaexacta.invoice.ui.list.components.InvoiceItemComponent
 import com.jorgemeza.medidaexacta.ui.theme.LigthGray
 
@@ -28,7 +28,7 @@ fun InvoiceScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButtonComponent {
+            com.jorgemeza.ui.components.FloatingActionButtonComponent {
 
             }
         }
@@ -43,7 +43,7 @@ fun InvoiceScreen(
                     .background(LigthGray)
                     .fillMaxSize()
             ) {
-                TopBarComponent(value = state.searchQuery,
+                com.jorgemeza.ui.components.TopBarComponent(value = state.searchQuery,
                     onChange = {
                         invoiceViewModel.onEvent(InvoiceEvent.OnSearchQueryChange(it))
                     },

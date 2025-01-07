@@ -1,7 +1,7 @@
 package com.jorgemeza.medidaexacta.shoppingCar.data.repository
 
 import androidx.room.Transaction
-import com.jorgemeza.medidaexacta.core.util.resultOf
+import com.jorgemeza.data.util.resultOf
 import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDomain
 import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDto

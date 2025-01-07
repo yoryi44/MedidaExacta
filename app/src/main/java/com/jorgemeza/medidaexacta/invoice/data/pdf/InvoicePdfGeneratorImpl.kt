@@ -20,7 +20,7 @@ import com.itextpdf.layout.element.Table
 import com.itextpdf.layout.properties.TextAlignment
 import com.itextpdf.layout.properties.VerticalAlignment
 import com.jorgemeza.medidaexacta.client.domain.model.ClientModel
-import com.jorgemeza.medidaexacta.core.ext.toPrice
+import com.jorgemeza.data.ext.toPrice
 import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
 import com.jorgemeza.medidaexacta.invoice.domain.pdf.IInvoicePdfGenerator
