@@ -15,10 +15,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jorgemeza.ui.components.AlertDialogComponent
-import com.jorgemeza.ui.components.CircularProgresIndicatorComponent
-import com.jorgemeza.ui.components.FloatingActionButtonComponent
-import com.jorgemeza.ui.components.TopBarComponent
+import com.jorgemeza.medidaexacta.core.ui.AlertDialogComponent
+import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
+import com.jorgemeza.medidaexacta.core.ui.FloatingActionButtonComponent
+import com.jorgemeza.medidaexacta.core.ui.TopBarComponent
 import com.jorgemeza.medidaexacta.quotation.ui.list.components.QuotationItemComponent
 import com.jorgemeza.medidaexacta.ui.theme.Danger
 import com.jorgemeza.medidaexacta.ui.theme.LigthGray
@@ -33,7 +33,7 @@ fun QuotationScreen(
 
     Scaffold(
         floatingActionButton = {
-            com.jorgemeza.ui.components.FloatingActionButtonComponent {
+            FloatingActionButtonComponent {
                 onDetail(null)
             }
         }
@@ -50,7 +50,7 @@ fun QuotationScreen(
             ) {
 
                 if(!state.error.isNullOrBlank()) {
-                    com.jorgemeza.ui.components.AlertDialogComponent(
+                    AlertDialogComponent(
                         icon = Icons.Default.Warning,
                         title = "Error",
                         message = state.error,
@@ -65,7 +65,7 @@ fun QuotationScreen(
                 }
 
                 if (!state.idQuotationDelete.isNullOrBlank()) {
-                    com.jorgemeza.ui.components.AlertDialogComponent(
+                    AlertDialogComponent(
                         icon = Icons.Default.Warning,
                         title = "Are you sure you want to delete the Product?",
                         message = "Once deleted, you will not be able to recover the information.",
@@ -79,7 +79,7 @@ fun QuotationScreen(
                     )
                 }
 
-                com.jorgemeza.ui.components.TopBarComponent(value = state.searchQuery,
+                TopBarComponent(value = state.searchQuery,
                     onChange = {
                         quotationViewModel.onEvent(QuotationEvent.OnSearchQueryChange(it))
                     },
@@ -90,7 +90,7 @@ fun QuotationScreen(
 
                 if(state.isLoading)
                 {
-                    com.jorgemeza.ui.components.CircularProgresIndicatorComponent()
+                    CircularProgresIndicatorComponent()
                 }
                 else
                 {

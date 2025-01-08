@@ -1,14 +1,22 @@
 package com.jorgemeza.medidaexacta.quotation.data.repository
 
-import com.jorgemeza.data.util.resultOf
+import com.jorgemeza.medidaexacta.core.util.resultOf
 import com.jorgemeza.medidaexacta.quotation.data.local.QuotationDao
 import com.jorgemeza.medidaexacta.quotation.data.mapper.toDomain
 import com.jorgemeza.medidaexacta.quotation.data.mapper.toDto
 import com.jorgemeza.medidaexacta.quotation.data.mapper.toEntity
 import com.jorgemeza.medidaexacta.quotation.data.mapper.toSyncEntity
 import com.jorgemeza.medidaexacta.quotation.data.remote.IQuotationApi
+import com.jorgemeza.medidaexacta.quotation.domain.model.DetailModel
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
 import com.jorgemeza.medidaexacta.quotation.domain.repository.IQuotationRepository
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDetailDomain
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDomain
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toDto
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toEntity
+import com.jorgemeza.medidaexacta.shoppingCar.data.mapper.toSyncEntity
+import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
+import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow

@@ -1,6 +1,6 @@
 package com.jorgemeza.medidaexacta.invoice.data.repository
 
-import com.jorgemeza.data.util.resultOf
+import com.jorgemeza.medidaexacta.core.util.resultOf
 import com.jorgemeza.medidaexacta.invoice.data.local.InvoiceDao
 import com.jorgemeza.medidaexacta.invoice.data.mapper.toDomain
 import com.jorgemeza.medidaexacta.invoice.data.mapper.toDto

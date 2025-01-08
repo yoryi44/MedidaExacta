@@ -1,8 +1,8 @@
 package com.jorgemeza.medidaexacta.quotation.data.di
 
 import android.content.Context
-import com.jorgemeza.data.api.Api.BASE_URL
-import com.jorgemeza.medidaexacta.db.db.MedidaExactaDataBase
+import com.jorgemeza.medidaexacta.core.api.Api.BASE_URL
+import com.jorgemeza.medidaexacta.core.db.MedidaExactaDataBase
 import com.jorgemeza.medidaexacta.quotation.data.local.QuotationDao
 import com.jorgemeza.medidaexacta.quotation.data.pdf.QuotationPdfGeneratorImpl
 import com.jorgemeza.medidaexacta.quotation.data.remote.IQuotationApi
@@ -49,7 +49,7 @@ object QuotationModule {
     @Provides
     @Singleton
     fun provideQuotationApi(client: OkHttpClient): IQuotationApi {
-        return Retrofit.Builder().baseUrl(com.jorgemeza.data.api.Api.BASE_URL).client(client)
+        return Retrofit.Builder().baseUrl(BASE_URL).client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(IQuotationApi::class.java)

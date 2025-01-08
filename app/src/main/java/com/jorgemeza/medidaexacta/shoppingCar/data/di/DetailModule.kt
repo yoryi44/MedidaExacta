@@ -1,7 +1,7 @@
 package com.jorgemeza.medidaexacta.shoppingCar.data.di
 
-import com.jorgemeza.data.api.Api.BASE_URL
-import com.jorgemeza.medidaexacta.db.db.MedidaExactaDataBase
+import com.jorgemeza.medidaexacta.core.api.Api.BASE_URL
+import com.jorgemeza.medidaexacta.core.db.MedidaExactaDataBase
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.DetailDao
 import com.jorgemeza.medidaexacta.shoppingCar.data.local.IDetailApi
 import com.jorgemeza.medidaexacta.shoppingCar.data.repository.DetailRepositoryImpl
@@ -36,7 +36,7 @@ object DetailModule {
     @Provides
     @Singleton
     fun provideDetailApi(client: OkHttpClient): IDetailApi {
-        return Retrofit.Builder().baseUrl(com.jorgemeza.data.api.Api.BASE_URL).client(client)
+        return Retrofit.Builder().baseUrl(BASE_URL).client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(IDetailApi::class.java)

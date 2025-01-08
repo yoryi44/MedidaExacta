@@ -24,9 +24,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jorgemeza.ui.components.ButtonComponent
-import com.jorgemeza.ui.components.CircularProgresIndicatorComponent
-import com.jorgemeza.ui.components.TextFieldComponent
+import com.jorgemeza.medidaexacta.core.ui.ButtonComponent
+import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
+import com.jorgemeza.medidaexacta.core.ui.TextFieldComponent
 
 @Composable
 fun ClientDetailScreen(
@@ -58,9 +58,9 @@ fun ClientDetailScreen(
     ) {
 
         if (state.isLoading) {
-            com.jorgemeza.ui.components.CircularProgresIndicatorComponent()
+            CircularProgresIndicatorComponent()
         } else {
-            com.jorgemeza.ui.components.TextFieldComponent(
+            TextFieldComponent(
                 value = state.name,
                 leadingIcon = Icons.Default.AccountBox,
                 modifier = Modifier
@@ -81,7 +81,7 @@ fun ClientDetailScreen(
                 clientDetailViewModel.onEvent(ClientDetailEvent.OnNameChange(it))
             }
 
-            com.jorgemeza.ui.components.TextFieldComponent(
+            TextFieldComponent(
                 value = state.address,
                 leadingIcon = Icons.Default.Home,
                 modifier = Modifier
@@ -102,7 +102,7 @@ fun ClientDetailScreen(
                 clientDetailViewModel.onEvent(ClientDetailEvent.OnAddressChange(it))
             }
 
-            com.jorgemeza.ui.components.TextFieldComponent(
+            TextFieldComponent(
                 value = state.phone,
                 leadingIcon = Icons.Default.Phone,
                 modifier = Modifier
@@ -123,7 +123,7 @@ fun ClientDetailScreen(
                 clientDetailViewModel.onEvent(ClientDetailEvent.OnPhoneChange(it))
             }
 
-            com.jorgemeza.ui.components.TextFieldComponent(
+            TextFieldComponent(
                 value = state.email ?: "",
                 leadingIcon = Icons.Default.Email,
                 modifier = Modifier
@@ -144,7 +144,7 @@ fun ClientDetailScreen(
                 clientDetailViewModel.onEvent(ClientDetailEvent.OnEmailChange(it))
             }
 
-            com.jorgemeza.ui.components.TextFieldComponent(
+            TextFieldComponent(
                 value = state.postalCode,
                 leadingIcon = Icons.Default.Home,
                 modifier = Modifier
@@ -165,7 +165,7 @@ fun ClientDetailScreen(
                 clientDetailViewModel.onEvent(ClientDetailEvent.OnPostalCodeChange(it))
             }
 
-            com.jorgemeza.ui.components.TextFieldComponent(
+            TextFieldComponent(
                 value = state.cif ?: "",
                 leadingIcon = Icons.Default.Edit,
                 modifier = Modifier
@@ -186,7 +186,7 @@ fun ClientDetailScreen(
 
             Spacer(Modifier.weight(1f))
 
-            com.jorgemeza.ui.components.ButtonComponent(modifier = Modifier, text = "Save") {
+            ButtonComponent(modifier = Modifier, text = "Save") {
                 clientDetailViewModel.onEvent(ClientDetailEvent.OnSaveClient)
             }
         }

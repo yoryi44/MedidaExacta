@@ -16,9 +16,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jorgemeza.ui.components.AlertDialogComponent
-import com.jorgemeza.ui.components.CircularProgresIndicatorComponent
-import com.jorgemeza.ui.components.FloatingActionButtonComponent
+import com.jorgemeza.medidaexacta.core.ui.AlertDialogComponent
+import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
+import com.jorgemeza.medidaexacta.core.ui.FloatingActionButtonComponent
 import com.jorgemeza.medidaexacta.shoppingCar.ui.list.components.ShoppingCardItemComponent
 import com.jorgemeza.medidaexacta.ui.theme.Danger
 import com.jorgemeza.medidaexacta.ui.theme.LigthGray
@@ -40,7 +40,7 @@ fun ShoppingCarScreen(
 
     Scaffold(
         floatingActionButton = {
-            com.jorgemeza.ui.components.FloatingActionButtonComponent {
+            FloatingActionButtonComponent {
                 onDetail(null)
             }
         }
@@ -57,7 +57,7 @@ fun ShoppingCarScreen(
             ) {
 
                 if (!state.idDetailDelete.isNullOrBlank()) {
-                    com.jorgemeza.ui.components.AlertDialogComponent(
+                    AlertDialogComponent(
                         icon = Icons.Default.Warning,
                         title = "Are you sure you want to delete the Product?",
                         message = "Once deleted, you will not be able to recover the information.",
@@ -72,7 +72,7 @@ fun ShoppingCarScreen(
                 }
 
                 if(!state.error.isNullOrBlank()) {
-                    com.jorgemeza.ui.components.AlertDialogComponent(
+                    AlertDialogComponent(
                         icon = Icons.Default.Warning,
                         title = "Error",
                         message = state.error,
@@ -88,7 +88,7 @@ fun ShoppingCarScreen(
 
                 if(state.isLoading)
                 {
-                    com.jorgemeza.ui.components.CircularProgresIndicatorComponent()
+                    CircularProgresIndicatorComponent()
                 }
                 else
                 {

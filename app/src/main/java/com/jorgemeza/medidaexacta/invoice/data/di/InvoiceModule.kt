@@ -1,8 +1,8 @@
 package com.jorgemeza.medidaexacta.invoice.data.di
 
 import android.content.Context
-import com.jorgemeza.data.api.Api.BASE_URL
-import com.jorgemeza.medidaexacta.db.db.MedidaExactaDataBase
+import com.jorgemeza.medidaexacta.core.api.Api.BASE_URL
+import com.jorgemeza.medidaexacta.core.db.MedidaExactaDataBase
 import com.jorgemeza.medidaexacta.invoice.data.local.InvoiceDao
 import com.jorgemeza.medidaexacta.invoice.data.pdf.InvoicePdfGeneratorImpl
 import com.jorgemeza.medidaexacta.invoice.data.remote.IInvoiceApi
@@ -43,7 +43,7 @@ object InvoiceModule {
     @Provides
     @Singleton
     fun provideInvoiceApi(client: OkHttpClient) : IInvoiceApi {
-        return Retrofit.Builder().baseUrl(com.jorgemeza.data.api.Api.BASE_URL).client(client)
+        return Retrofit.Builder().baseUrl(BASE_URL).client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(IInvoiceApi::class.java)

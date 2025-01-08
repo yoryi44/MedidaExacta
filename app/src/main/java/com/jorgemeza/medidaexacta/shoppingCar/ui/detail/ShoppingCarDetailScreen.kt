@@ -20,9 +20,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.jorgemeza.ui.components.ButtonComponent
-import com.jorgemeza.ui.components.CircularProgresIndicatorComponent
-import com.jorgemeza.ui.components.TextFieldComponent
+import com.jorgemeza.medidaexacta.core.ui.ButtonComponent
+import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
+import com.jorgemeza.medidaexacta.core.ui.TextFieldComponent
 
 @Composable
 fun ShopingCarDetailScreen(
@@ -61,9 +61,9 @@ fun ShopingCarDetailScreen(
     ) {
 
         if (state.isLoading) {
-            com.jorgemeza.ui.components.CircularProgresIndicatorComponent()
+            CircularProgresIndicatorComponent()
         } else {
-            com.jorgemeza.ui.components.TextFieldComponent(
+            TextFieldComponent(
                 value = state.product,
                 leadingIcon = Icons.Default.ShoppingCart,
                 modifier = Modifier
@@ -84,7 +84,7 @@ fun ShopingCarDetailScreen(
                 shoppingCarDetailViewModel.onEvent(ShoppingCarDetailEvent.OnProductEvent(it))
             }
 
-            com.jorgemeza.ui.components.TextFieldComponent(
+            TextFieldComponent(
                 value = state.price,
                 leadingIcon = Icons.Default.ShoppingCart,
                 modifier = Modifier
@@ -105,7 +105,7 @@ fun ShopingCarDetailScreen(
                 shoppingCarDetailViewModel.onEvent(ShoppingCarDetailEvent.OnPriceEvent(it))
             }
 
-            com.jorgemeza.ui.components.TextFieldComponent(
+            TextFieldComponent(
                 value = state.amount,
                 leadingIcon = Icons.Default.ShoppingCart,
                 modifier = Modifier
@@ -126,7 +126,7 @@ fun ShopingCarDetailScreen(
 
             Spacer(Modifier.weight(1f))
 
-            com.jorgemeza.ui.components.ButtonComponent(text = "Save") {
+            ButtonComponent(text = "Save") {
                 shoppingCarDetailViewModel.onEvent(ShoppingCarDetailEvent.OnSave)
             }
         }
