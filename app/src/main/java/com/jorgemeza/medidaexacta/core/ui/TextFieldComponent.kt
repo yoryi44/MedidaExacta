@@ -73,12 +73,17 @@ fun TextFieldComponent(
                 focusedTextColor = Color.Black,
                 unfocusedTextColor = Color.Gray,
                 focusedLabelColor = Color.Black,
-                unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                unfocusedLabelColor = Color.Gray,
                 focusedBorderColor = Color.Black,
                 unfocusedBorderColor = Color.Gray,
                 focusedContainerColor = Color.White,
                 unfocusedContainerColor = Color.White,
+                focusedTrailingIconColor = Color.DarkGray,
+                unfocusedTrailingIconColor = Color.DarkGray,
                 disabledLabelColor = Color.Gray,
+                disabledTextColor = Color.Gray,
+                disabledBorderColor = Color.Gray,
+                disabledTrailingIconColor = Color.Gray,
             ),
         )
         if(errorMessaje != null){

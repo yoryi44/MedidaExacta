@@ -107,7 +107,7 @@ class QuotationPdfGeneratorImpl(
                     .setVerticalAlignment(VerticalAlignment.MIDDLE).setPadding(5f)
                 table.addCell(cell)
 
-                cell = Cell().add(Paragraph(it.price)).setTextAlignment(TextAlignment.LEFT)
+                cell = Cell().add(Paragraph(it.price.toPrice())).setTextAlignment(TextAlignment.LEFT)
                     .setVerticalAlignment(VerticalAlignment.MIDDLE).setPadding(5f)
                 table.addCell(cell)
 

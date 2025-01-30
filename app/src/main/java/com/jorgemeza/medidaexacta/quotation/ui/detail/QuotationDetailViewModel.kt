@@ -76,6 +76,11 @@ class QuotationDetailViewModel @Inject constructor(
             QuotationDetailEvent.OnSaveInvoice -> {
                 saveInvoice()
             }
+
+            is QuotationDetailEvent.OnObservationChange ->
+            {
+                state = state.copy(observations = event.observations)
+            }
         }
     }
 
@@ -91,7 +96,8 @@ class QuotationDetailViewModel @Inject constructor(
                 client = state.clients.firstOrNull { it.name == state.client }!!.id,
                 quotation = quotation.id,
                 invoiceNumber = invoiceNumber,
-                date = LocalDate.now().toString()
+                date = LocalDate.now().toString(),
+                observations = state.observations
             )
 
             addInvoiceUseCase(invoice)
@@ -112,6 +118,7 @@ class QuotationDetailViewModel @Inject constructor(
                     quotationNumber = state.quotationNumber,
                     price = state.price,
                     date = state.date,
+                    observation = state.observations
                 )
 
                 addQuotationUserCase(quotation)
@@ -167,6 +174,7 @@ class QuotationDetailViewModel @Inject constructor(
                 products = products,
                 price = products.sumOf { it.price.toDouble() }.toString(),
                 date = quotation.date,
+                observations = quotation.observation,
                 isLoading = false
             )
         }

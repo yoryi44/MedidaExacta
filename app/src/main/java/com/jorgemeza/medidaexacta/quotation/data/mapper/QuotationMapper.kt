@@ -14,7 +14,8 @@ fun QuotationResponse.toDomain(): List<QuotationModel> {
             client = it.value.client,
             quotationNumber = it.value.quotationNumber,
             price = it.value.price,
-            date = it.value.date
+            date = it.value.date,
+            observation = it.value.observation
         )
     }
 }
@@ -25,7 +26,8 @@ fun QuotationModel.toEntity(): QuotationEntity {
         client = this.client,
         quotationNumber = this.quotationNumber,
         price = this.price,
-        date = this.date
+        date = this.date,
+        observation = this.observation
     )
 }
 
@@ -35,7 +37,8 @@ fun QuotationEntity.toDomain(): QuotationModel {
         client = this.client,
         quotationNumber = this.quotationNumber,
         price = this.price,
-        date = this.date
+        date = this.date,
+        observation = this.observation
     )
 }
 
@@ -44,7 +47,8 @@ fun QuotationModel.toDto(): QuotationResponse {
         client = this.client,
         quotationNumber = this.quotationNumber,
         price = this.price,
-        date = this.date
+        date = this.date,
+        observation = this.observation
     )
     return mapOf(id to dto)
 }

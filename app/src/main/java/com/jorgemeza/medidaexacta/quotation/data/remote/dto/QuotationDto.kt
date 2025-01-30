@@ -7,4 +7,5 @@ data class QuotationDto (
     @SerializedName("quotation_number") val quotationNumber : String,
     @SerializedName("price") val price : String,
     @SerializedName("date") val date : String,
+    @SerializedName("observation") val observation : String?
 )

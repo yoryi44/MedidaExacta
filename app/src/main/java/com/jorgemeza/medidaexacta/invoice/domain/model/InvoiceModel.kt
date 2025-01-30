@@ -5,5 +5,6 @@ data class InvoiceModel (
     val invoiceNumber : String,
     val quotation : String,
     val client : String,
-    val date : String
+    val date : String,
+    val observations : String?
 )

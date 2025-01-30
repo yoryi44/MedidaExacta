@@ -10,5 +10,6 @@ data class InvoiceEntity (
     val invoiceNumber : String,
     val client : String,
     val quotation : String,
-    val date : String
+    val date : String,
+    val observations : String?
 )

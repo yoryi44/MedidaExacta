@@ -11,4 +11,5 @@ data class QuotationEntity (
     val quotationNumber : String,
     val price : String,
     val date : String,
+    val observation : String?
 )

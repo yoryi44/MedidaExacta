@@ -13,13 +13,13 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface QuotationDao {
 
-    @Query("SELECT q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id ORDER BY date,name DESC")
+    @Query("SELECT q.observation,q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id ORDER BY date,name DESC")
     fun getAllQuotation(): Flow<List<QuotationEntity>>
 
-    @Query("SELECT q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id ORDER BY date,name DESC")
+    @Query("SELECT q.observation,q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id ORDER BY date,name DESC")
     fun getAllQuotationMain(): List<QuotationEntity>
 
-    @Query("SELECT q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id WHERE q.id = :id")
+    @Query("SELECT q.observation,q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id WHERE q.id = :id")
     suspend fun getQuotationById(id: String): QuotationEntity
 
     @Query("SELECT * FROM QuotationEntity WHERE id = :id")
@@ -43,7 +43,7 @@ interface QuotationDao {
     @Query("SELECT (MAX(quotationNumber) +1) FROM QuotationEntity")
     suspend fun getQuotationConsecutive(): String
 
-    @Query("SELECT q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id WHERE client LIKE '%' || :search || '%' " +
+    @Query("SELECT q.observation,q.id,price,date,quotationNumber,c.name as client FROM QuotationEntity q LEFT JOIN ClientEntity c ON client = c.id WHERE client LIKE '%' || :search || '%' " +
             "OR price LIKE '%' || :search || '%' OR date LIKE '%' || :search || '%' " +
             "OR name LIKE '%' || :search || '%' " +
             "ORDER BY date ASC")

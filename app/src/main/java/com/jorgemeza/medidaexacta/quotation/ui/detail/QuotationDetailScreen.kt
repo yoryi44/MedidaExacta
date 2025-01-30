@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Warning
@@ -167,6 +169,28 @@ fun QuotationDetailScreen(
             )
             {
                 quotationDetailViewModel.onEvent(QuotationDetailEvent.OnClientChange(it))
+            }
+
+            TextFieldComponent(
+                value = state.observations ?: "",
+                leadingIcon = Icons.Default.Edit,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp, horizontal = 8.dp)
+                    .height(120.dp),
+                label = "Observations",
+                keyboardOptions = KeyboardOptions(
+                    autoCorrect = false,
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                ),
+                keyboardActions = KeyboardActions(onAny = {
+                    focusManager.moveFocus(
+                        FocusDirection.Next
+                    )
+                }),
+            ) {
+                quotationDetailViewModel.onEvent(QuotationDetailEvent.OnObservationChange(it))
             }
 
             ListQuotationDetailComponent(modifier = Modifier.weight(1f), state.products)

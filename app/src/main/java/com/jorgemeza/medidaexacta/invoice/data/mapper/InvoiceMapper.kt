@@ -14,7 +14,8 @@ fun InvoiceResponse.toDomain(): List<InvoiceModel> {
             invoiceNumber = it.value.invoiceNumber,
             quotation = it.value.quotation,
             client = it.value.client,
-            date = it.value.date
+            date = it.value.date,
+            observations = it.value.observation
         )
     }
 }
@@ -25,6 +26,7 @@ fun InvoiceModel.toDto(): InvoiceResponse {
         quotation = this.quotation,
         client = this.client,
         date = this.date,
+        observation = this.observations
     )
     return mapOf(id to dto)
 }
@@ -35,7 +37,8 @@ fun InvoiceEntity.toDomain(): InvoiceModel {
         quotation = this.quotation,
         client = this.client,
         invoiceNumber = this.invoiceNumber,
-        date = this.date
+        date = this.date,
+        observations = this.observations
     )
 }
 
@@ -45,7 +48,8 @@ fun InvoiceModel.toEntity(): InvoiceEntity {
         quotation = this.quotation,
         client = this.client,
         invoiceNumber = this.invoiceNumber,
-        date = this.date
+        date = this.date,
+        observations = this.observations
     )
 }
 
