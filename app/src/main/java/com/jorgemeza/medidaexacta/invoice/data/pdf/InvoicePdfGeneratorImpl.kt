@@ -48,25 +48,41 @@ class InvoicePdfGeneratorImpl(
             val pdfDocument = PdfDocument(pdfWriter)
             val document = Document(pdfDocument)
 
-            val bitmap = BitmapFactory.decodeResource(context.resources,context.resources.getIdentifier("ic_launcher_background_png", "drawable", context.packageName))
-            val stream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-            val imageBytes = stream.toByteArray()
-
-            val imagen = Image(
-                ImageDataFactory.create(imageBytes)
-            )
-
-            imagen.setWidth(200f)
-            imagen.setHeight(200f)
-            imagen.setFixedPosition(20f, 750f) // Coordenadas (x, y)
-
-            document.add(imagen)
+//            val bitmap = BitmapFactory.decodeResource(context.resources,context.resources.getIdentifier("ic_launcher_background_png", "drawable", context.packageName))
+//            val stream = ByteArrayOutputStream()
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+//            val imageBytes = stream.toByteArray()
+//
+//            val imagen = Image(
+//                ImageDataFactory.create(imageBytes)
+//            )
+//
+//            imagen.setWidth(200f)
+//            imagen.setHeight(200f)
+//            imagen.setFixedPosition(20f, 750f) // Coordenadas (x, y)
+//
+//            document.add(imagen)
 
             val title = Paragraph("Factura Nº${invoiceNumber}").setTextAlignment(
                 TextAlignment.CENTER
             ).setFontSize(20f).setBold()
             document.add(title)
+
+            val legalRepresentative = Paragraph("David Alejandro Mora Márquez").setTextAlignment(
+                TextAlignment.LEFT
+            ).setFontSize(20f).setBold()
+            document.add(legalRepresentative)
+
+            val LegalRepresentativeInfo = Paragraph(
+            """
+        C/Almonte 16, Portal D, bajo B
+        Madrid - 28031
+        Cif: Z0102622R
+        """.trimIndent()
+            ).setFontSize(12f).setTextAlignment(
+                TextAlignment.LEFT
+            )
+            document.add(LegalRepresentativeInfo)
 
             var table = Table(floatArrayOf(1f))
                 .useAllAvailableWidth().setMarginTop(20f)
@@ -81,6 +97,7 @@ class InvoicePdfGeneratorImpl(
         CLIENTE: ${client.name}
         DIRECCIÓN: ${client.address}
         FECHA: ${quotation.date}
+        CIF: ${client.cif}
         """.trimIndent()
             ).setMarginTop(10f).setFontSize(12f)
             document.add(clientInfo)

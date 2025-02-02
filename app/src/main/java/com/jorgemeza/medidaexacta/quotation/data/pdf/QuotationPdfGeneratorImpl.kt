@@ -39,7 +39,6 @@ class QuotationPdfGeneratorImpl(
         try {
 
             var subtotal : Double = 0.0
-            var iva : Double = 0.0
             val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
 
             val filePath = File(dir, "example.pdf")
@@ -48,20 +47,20 @@ class QuotationPdfGeneratorImpl(
             val pdfDocument = PdfDocument(pdfWriter)
             val document = Document(pdfDocument)
 
-            val bitmap = BitmapFactory.decodeResource(context.resources,context.resources.getIdentifier("ic_launcher_background_png", "drawable", context.packageName))
-            val stream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-            val imageBytes = stream.toByteArray()
-
-            val imagen = Image(
-                ImageDataFactory.create(imageBytes)
-            )
-
-            imagen.setWidth(200f)
-            imagen.setHeight(200f)
-            imagen.setFixedPosition(20f, 750f) // Coordenadas (x, y)
-
-            document.add(imagen)
+//            val bitmap = BitmapFactory.decodeResource(context.resources,context.resources.getIdentifier("ic_launcher_background_png", "drawable", context.packageName))
+//            val stream = ByteArrayOutputStream()
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+//            val imageBytes = stream.toByteArray()
+//
+//            val imagen = Image(
+//                ImageDataFactory.create(imageBytes)
+//            )
+//
+//            imagen.setWidth(200f)
+//            imagen.setHeight(200f)
+//            imagen.setFixedPosition(20f, 750f) // Coordenadas (x, y)
+//
+//            document.add(imagen)
 
             val title = Paragraph("Presupuesto Nº${quotation.quotationNumber}").setTextAlignment(
                 TextAlignment.CENTER
@@ -120,37 +119,34 @@ class QuotationPdfGeneratorImpl(
                 table.addCell(cell)
 
                 subtotal += value
-                iva += subtotal * 0.21
             }
 
             document.add(table)
 
             val totals = Table(floatArrayOf(3f, 1f)).useAllAvailableWidth().setMarginTop(20f)
 
-            totals.addCell(Cell().add(Paragraph("SUBTOTAL")).setBorder(Border.NO_BORDER))
+            totals.addCell(Cell().add(Paragraph("TOTAL")).setBorder(Border.NO_BORDER))
             totals.addCell(
                 Cell().add(Paragraph(subtotal.toString().toPrice())).setTextAlignment(TextAlignment.RIGHT)
                     .setBorder(Border.NO_BORDER)
             )
 
-            totals.addCell(Cell().add(Paragraph("IVA (21%)")).setBorder(Border.NO_BORDER))
-            totals.addCell(
-                Cell().add(Paragraph(iva.toString().toPrice())).setTextAlignment(TextAlignment.RIGHT)
-                    .setBorder(Border.NO_BORDER)
-            )
-
-            totals.addCell(Cell().add(Paragraph("TOTAL")).setBold().setBorder(Border.NO_BORDER))
-            totals.addCell(
-                Cell().add(Paragraph((subtotal + iva).toString().toPrice())).setBold()
-                    .setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER)
-            )
-
             document.add(totals)
 
             val note =
-                Paragraph("Forma de pago: 50% al iniciar, 50% al terminar").setFontSize(10f)
+                Paragraph("Forma de pago: 50% al iniciar, 50% al terminar. Este valor no incluye IVA" +
+                        "").setFontSize(15f)
                     .setMarginTop(20f)
+                    .setBold()
             document.add(note)
+
+            if(!quotation.observation.isNullOrBlank())
+            {
+                val observations =
+                    Paragraph("NOTE: ${quotation.observation}").setFontSize(10f)
+                        .setMarginTop(20f)
+                document.add(observations)
+            }
 
             document.close()
 
