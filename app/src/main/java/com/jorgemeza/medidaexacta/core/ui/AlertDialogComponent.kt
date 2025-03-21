@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
+import com.jorgemeza.medidaexacta.R
 
 @Composable
 fun AlertDialogComponent(
@@ -32,12 +34,12 @@ fun AlertDialogComponent(
         text = { Text(message) },
         confirmButton = {
             Button(onClick = { onConfirm() },modifier = modifier) {
-                Text("Acept", color = Color.Black)
+                Text(stringResource(R.string.Acept), color = Color.Black)
             }
         },
         dismissButton = {
             Button(onClick = { onDismiss() }) {
-                Text("Cancel", color = Color.Black)
+                Text(stringResource(R.string.Cancel), color = Color.Black)
             }
         }
     )

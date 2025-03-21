@@ -1,3 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Medida Exacta</string>
+
+    <!-- LABELS -->
+    <string name="Product" translatable="false">Product</string>
+    <string name="Price" translatable="false">Price</string>
+    <string name="Amount" translatable="false">Amount</string>
+    <string name="Quotation_Number" translatable="false">Quotation Number</string>
+    <string name="Date" translatable="false">Date</string>
+    <string name="Choose_an_option" translatable="false">Choose_an_option</string>
+    <string name="Observations" translatable="false">Observations</string>
+    <string name="Name" translatable="false">Name</string>
+    <string name="Address" translatable="false">Address</string>
+    <string name="Phone" translatable="false">Phone</string>
+    <string name="Email" translatable="false">Email</string>
+    <string name="Postal_Code" translatable="false">postal Code</string>
+
+    <!-- BUTTONS -->
+    <string name="Save" translatable="false">Save</string>
+    <string name="Print" translatable="false">Print</string>
+    <string name="Payment" translatable="false">Payment</string>
+    <string name="Invoice" translatable="false">Invoice</string>
+    <string name="Shop" translatable="false">Shop</string>
+    <string name="Acept" translatable="false">Acept</string>
+    <string name="Cancel" translatable="false">Cancel</string>
+
+    <!-- DIALOGS -->
+    <string name="delete_alert_dialog" translatable="false">Once deleted, you will not be able to recover the information.</string>
+    <string name="delete_client_alert_dialog" translatable="false">Are you sure you want to delete the client?</string>
+    <string name="delete_product_alert_dialog" translatable="false">Are you sure you want to delete the product?</string>
+    <string name="delete_quotation_alert_dialog" translatable="false">Are you sure you want to delete the quotation?</string>
+
 </resources>

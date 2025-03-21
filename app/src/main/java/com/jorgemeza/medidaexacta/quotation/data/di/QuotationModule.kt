@@ -11,6 +11,7 @@ import com.jorgemeza.medidaexacta.quotation.domain.pdf.IQuotationPdfGenerator
 import com.jorgemeza.medidaexacta.quotation.domain.repository.IQuotationRepository
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.AddQuotationUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.DeleteQuotationUseCase
+import com.jorgemeza.medidaexacta.quotation.domain.usecase.GenerateQuotationPdfPaymentUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GenerateQuotationPdfUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationMainUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetAllQuotationUseCase
@@ -87,6 +88,12 @@ object QuotationModule {
     @Singleton
     fun provideGeneratePdfUseCase(pdfGenerator: IQuotationPdfGenerator): GenerateQuotationPdfUseCase {
         return GenerateQuotationPdfUseCase(pdfGenerator)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGeneratePdfPaymentUseCase(pdfGenerator: IQuotationPdfGenerator): GenerateQuotationPdfPaymentUseCase {
+        return GenerateQuotationPdfPaymentUseCase(pdfGenerator)
     }
 
     @Provides

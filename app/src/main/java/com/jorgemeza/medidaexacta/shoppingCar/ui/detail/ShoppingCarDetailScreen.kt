@@ -16,10 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jorgemeza.medidaexacta.R
 import com.jorgemeza.medidaexacta.core.ui.ButtonComponent
 import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
 import com.jorgemeza.medidaexacta.core.ui.TextFieldComponent
@@ -69,7 +71,7 @@ fun ShopingCarDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "Product",
+                label = stringResource(R.string.Product),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Text,
@@ -90,7 +92,7 @@ fun ShopingCarDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "Price",
+                label = stringResource(R.string.Price),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Number,
@@ -111,7 +113,7 @@ fun ShopingCarDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "Amount",
+                label = stringResource(R.string.Amount),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Number,

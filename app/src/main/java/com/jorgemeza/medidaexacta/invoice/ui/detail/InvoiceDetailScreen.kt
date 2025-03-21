@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Info
@@ -18,10 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jorgemeza.medidaexacta.R
 import com.jorgemeza.medidaexacta.core.ui.AlertDialogComponent
 import com.jorgemeza.medidaexacta.core.ui.ButtonComponent
 import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
@@ -48,7 +52,8 @@ fun InvoiceDetailScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(Color.White)
+            .verticalScroll(rememberScrollState()),
     ) {
 
         if (!state.error.isNullOrBlank()) {
@@ -76,7 +81,7 @@ fun InvoiceDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "Quotation Number",
+                label = stringResource(R.string.Quotation_Number),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Text,
@@ -96,7 +101,7 @@ fun InvoiceDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "Date",
+                label = stringResource(R.string.Date),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Text,
@@ -116,7 +121,7 @@ fun InvoiceDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "Price",
+                label = stringResource(R.string.Price),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Email,

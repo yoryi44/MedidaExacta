@@ -12,6 +12,7 @@ import com.jorgemeza.medidaexacta.invoice.domain.usecase.AddInvoiceUseCase
 import com.jorgemeza.medidaexacta.invoice.domain.usecase.GetInvoiceConsecutiveUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.AddQuotationUseCase
+import com.jorgemeza.medidaexacta.quotation.domain.usecase.GenerateQuotationPdfPaymentUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GenerateQuotationPdfUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationByIdUseCase
 import com.jorgemeza.medidaexacta.quotation.domain.usecase.GetQuotationConsecutiveUseCase
@@ -32,6 +33,7 @@ class QuotationDetailViewModel @Inject constructor(
     private val getQuotationDetailByIdUseCase: GetDetailByIdUseCase,
     private val getAllClientsUseCase: GetAllClientUseCase,
     private val generatePdfUseCase: GenerateQuotationPdfUseCase,
+    private val generateQuotationPdfPaymentUseCase: GenerateQuotationPdfPaymentUseCase,
     private val getQuotationConsecutiveUseCase: GetQuotationConsecutiveUseCase,
     private val addInvoiceUseCase: AddInvoiceUseCase,
     private val getInvoiceConsecutiveUseCase: GetInvoiceConsecutiveUseCase
@@ -81,6 +83,8 @@ class QuotationDetailViewModel @Inject constructor(
             {
                 state = state.copy(observations = event.observations)
             }
+
+            QuotationDetailEvent.OnPdfPayment -> createPDFPayment()
         }
     }
 
@@ -172,7 +176,7 @@ class QuotationDetailViewModel @Inject constructor(
                 client = quotation.client,
                 quotationNumber = quotation.quotationNumber,
                 products = products,
-                price = products.sumOf { it.price.toDouble() }.toString(),
+                price = products.sumOf { it.price.replace(",",".").toDouble() }.toString(),
                 date = quotation.date,
                 observations = quotation.observation,
                 isLoading = false
@@ -200,6 +204,27 @@ class QuotationDetailViewModel @Inject constructor(
                     isLoading = true
                 )
                 generatePdfUseCase(
+                    client = state.clients.firstOrNull { it.name == state.client }!!,
+                    quotation = quotation,
+                    state.products
+                )
+                state = state.copy(
+                    isLoading = false
+                )
+            }
+        }
+    }
+
+    private fun createPDFPayment() {
+
+        if (!state.id.isNullOrEmpty()) {
+
+            pdfJob?.cancel()
+            pdfJob = viewModelScope.launch {
+                state = state.copy(
+                    isLoading = true
+                )
+                generateQuotationPdfPaymentUseCase(
                     client = state.clients.firstOrNull { it.name == state.client }!!,
                     quotation = quotation,
                     state.products

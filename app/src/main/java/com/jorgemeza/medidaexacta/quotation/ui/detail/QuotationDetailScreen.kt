@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Edit
@@ -21,10 +23,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jorgemeza.medidaexacta.R
 import com.jorgemeza.medidaexacta.core.ui.AlertDialogComponent
 import com.jorgemeza.medidaexacta.core.ui.ButtonComponent
 import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
@@ -64,7 +68,8 @@ fun QuotationDetailScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(Color.White)
+            .verticalScroll(rememberScrollState()),
     ) {
 
         if (!state.error.isNullOrBlank()) {
@@ -107,7 +112,7 @@ fun QuotationDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "Quotation Number",
+                label = stringResource(R.string.Quotation_Number),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Text,
@@ -127,7 +132,7 @@ fun QuotationDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "Date",
+                label = stringResource(R.string.Date),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Text,
@@ -147,7 +152,7 @@ fun QuotationDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "Price",
+                label = stringResource(R.string.Price),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Email,
@@ -178,7 +183,7 @@ fun QuotationDetailScreen(
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp)
                     .height(120.dp),
-                label = "Observations",
+                label = stringResource(R.string.Observations),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Email,
@@ -197,29 +202,37 @@ fun QuotationDetailScreen(
 
             Row {
 
-                ButtonComponent(modifier = Modifier.weight(1f), text = "Save") {
+                ButtonComponent(modifier = Modifier.weight(1f), text = stringResource(R.string.Save)) {
                     quotationDetailViewModel.onEvent(QuotationDetailEvent.OnSave)
                 }
 
                 if (!state.id.isNullOrEmpty()) {
 
-                    if(!state.products.isEmpty())
+                    if(state.products.isNotEmpty())
                     {
                         ButtonComponent(
                             modifier = Modifier.weight(1f),
-                            text = "Print",
+                            text = stringResource(R.string.Print),
                             color = Danger
                         ) {
                             quotationDetailViewModel.onEvent(QuotationDetailEvent.OnPdf)
                         }
 
-                        ButtonComponent(modifier = Modifier.weight(1f), text = "Invoice", color = Warning) {
+                        ButtonComponent(
+                            modifier = Modifier.weight(1f),
+                            text = stringResource(R.string.Payment),
+                            color = Danger
+                        ) {
+                            quotationDetailViewModel.onEvent(QuotationDetailEvent.OnPdfPayment)
+                        }
+
+                        ButtonComponent(modifier = Modifier.weight(1f), text = stringResource(R.string.Invoice), color = Warning) {
                             quotationDetailViewModel.onEvent(QuotationDetailEvent.OnInvoice)
                         }
 
                     }
 
-                    ButtonComponent(modifier = Modifier.weight(1f), text = "Shop", color = Success) {
+                    ButtonComponent(modifier = Modifier.weight(1f), text = stringResource(R.string.Shop), color = Success) {
                         onShoppingCar(state.id, state.quotationNumber)
                     }
                 }

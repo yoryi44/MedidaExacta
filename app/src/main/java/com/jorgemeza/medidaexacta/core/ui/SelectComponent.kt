@@ -19,7 +19,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.jorgemeza.medidaexacta.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,7 +60,7 @@ fun SelectComponent(
                 disabledBorderColor = Color.Gray,
                 disabledTrailingIconColor = Color.Black,
             ),
-            label = { Text("Choose an option") },
+            label = { Text(stringResource(R.string.Choose_an_option)) },
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
             },

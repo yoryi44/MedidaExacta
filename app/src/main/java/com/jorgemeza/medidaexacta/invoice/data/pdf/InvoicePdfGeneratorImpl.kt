@@ -26,6 +26,7 @@ import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
 import com.jorgemeza.medidaexacta.invoice.domain.pdf.IInvoicePdfGenerator
 import java.io.File
 import java.io.IOException
+import java.time.LocalDate
 
 class InvoicePdfGeneratorImpl(
     private val context: Context
@@ -75,10 +76,11 @@ class InvoicePdfGeneratorImpl(
 
             val LegalRepresentativeInfo = Paragraph(
             """
-        C/Almonte 16, Portal D, bajo B
-        Madrid - 28031
-        Cif: Z0102622R
-        """.trimIndent()
+                ${LocalDate.now()} 
+                C/Almonte 16, Portal D, bajo B
+                Madrid - 28031
+                Cif: Z0102622R
+                """.trimIndent()
             ).setFontSize(12f).setTextAlignment(
                 TextAlignment.LEFT
             )
@@ -96,7 +98,8 @@ class InvoicePdfGeneratorImpl(
                 """
         CLIENTE: ${client.name}
         DIRECCIÓN: ${client.address}
-        FECHA: ${quotation.date}
+        CP: ${client.postalCode}
+        TELEFONO: ${client.phone}
         CIF: ${client.cif}
         """.trimIndent()
             ).setMarginTop(10f).setFontSize(12f)
@@ -164,10 +167,14 @@ class InvoicePdfGeneratorImpl(
 
             document.add(totals)
 
-            val note =
-                Paragraph("Forma de pago: 50% al iniciar, 50% al terminar").setFontSize(10f)
-                    .setMarginTop(20f)
-            document.add(note)
+            val paymentInfo = Paragraph(
+                """
+                FORMA PAGO:
+                Transferencia bancaria al número de cuenta: ES9700810473470001759278
+                """.trimIndent()
+            ).setMarginTop(10f).setFontSize(12f).setBold()
+
+            document.add(paymentInfo)
 
             document.close()
 

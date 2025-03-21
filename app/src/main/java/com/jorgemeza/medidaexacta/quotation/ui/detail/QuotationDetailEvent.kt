@@ -5,6 +5,7 @@ sealed interface QuotationDetailEvent {
     data class OnObservationChange(val observations: String) : QuotationDetailEvent
     object OnSave : QuotationDetailEvent
     object OnPdf : QuotationDetailEvent
+    object OnPdfPayment : QuotationDetailEvent
     object OnInvoice : QuotationDetailEvent
     object OnSaveInvoice : QuotationDetailEvent
     object OnDismissDialog : QuotationDetailEvent

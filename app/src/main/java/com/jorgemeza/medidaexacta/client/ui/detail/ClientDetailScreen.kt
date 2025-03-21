@@ -1,13 +1,16 @@
 package com.jorgemeza.medidaexacta.client.ui.detail
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Edit
@@ -20,10 +23,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jorgemeza.medidaexacta.R
 import com.jorgemeza.medidaexacta.core.ui.ButtonComponent
 import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
 import com.jorgemeza.medidaexacta.core.ui.TextFieldComponent
@@ -54,7 +59,8 @@ fun ClientDetailScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(Color.White)
+            .verticalScroll(rememberScrollState()),
     ) {
 
         if (state.isLoading) {
@@ -66,7 +72,7 @@ fun ClientDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "name",
+                label = stringResource(R.string.Name),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Text,
@@ -87,7 +93,7 @@ fun ClientDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "address",
+                label = stringResource(R.string.Address),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Text,
@@ -108,7 +114,7 @@ fun ClientDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "phone",
+                label = stringResource(R.string.Phone),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Phone,
@@ -129,7 +135,7 @@ fun ClientDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "email",
+                label = stringResource(R.string.Email),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Email,
@@ -150,7 +156,7 @@ fun ClientDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp, horizontal = 8.dp),
-                label = "postal code",
+                label = stringResource(R.string.Postal_Code),
                 keyboardOptions = KeyboardOptions(
                     autoCorrect = false,
                     keyboardType = KeyboardType.Text,
@@ -186,7 +192,7 @@ fun ClientDetailScreen(
 
             Spacer(Modifier.weight(1f))
 
-            ButtonComponent(modifier = Modifier, text = "Save") {
+            ButtonComponent(modifier = Modifier, text = stringResource(R.string.Save)) {
                 clientDetailViewModel.onEvent(ClientDetailEvent.OnSaveClient)
             }
         }

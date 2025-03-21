@@ -6,4 +6,5 @@ import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
 
 interface IQuotationPdfGenerator {
     suspend fun pdfGenerator(quotation: QuotationModel, client: ClientModel, detail: List<DetailModel>)
+    suspend fun pdfGeneratorPayment(quotation: QuotationModel, client: ClientModel, detail: List<DetailModel>)
 }

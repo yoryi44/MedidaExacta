@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Medida Exacta</string>
+
+    <!-- LABELS -->
+    <string name="Product" translatable="false">Producto</string>
+    <string name="Price" translatable="false">Precio</string>
+    <string name="Amount" translatable="false">Cantidad</string>
+    <string name="Quotation_Number" translatable="false">Número Presupuesto</string>
+    <string name="Date" translatable="false">Fecha</string>
+    <string name="Choose_an_option" translatable="false">Seleccione una opción</string>
+    <string name="Observations" translatable="false">Observaciones</string>
+    <string name="Name" translatable="false">Nombre</string>
+    <string name="Address" translatable="false">Dirección</string>
+    <string name="Phone" translatable="false">Teléfono</string>
+    <string name="Email" translatable="false">Correo</string>
+    <string name="Postal_Code" translatable="false">Código Postal</string>
+
+    <!-- BUTTONS -->
+    <string name="Save" translatable="false">Guardar</string>
+    <string name="Print" translatable="false">Imprimir</string>
+    <string name="Payment" translatable="false">Pago</string>
+    <string name="Invoice" translatable="false">Factura</string>
+    <string name="Shop" translatable="false">Tienda</string>
+    <string name="Acept" translatable="false">Aceptar</string>
+    <string name="Cancel" translatable="false">Cancelar</string>
+
+    <!-- DIALOGS -->
+    <string name="delete_alert_dialog" translatable="false">Una vez eliminado, no podrás recuperar la información.</string>
+    <string name="delete_client_alert_dialog" translatable="false">¿ Está seguro de que desea eliminar el cliente ?</string>
+    <string name="delete_product_alert_dialog" translatable="false">¿ Está seguro de que desea eliminar el producto ?</string>
+    <string name="delete_quotation_alert_dialog" translatable="false">¿ Está seguro de que desea eliminar el presupuesto ?</string>
+
+</resources>

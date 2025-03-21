@@ -17,8 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.jorgemeza.medidaexacta.R
 import com.jorgemeza.medidaexacta.core.ext.toPrice
 import com.jorgemeza.medidaexacta.quotation.domain.model.QuotationModel
 import com.jorgemeza.medidaexacta.ui.theme.Danger
@@ -66,7 +68,7 @@ fun QuotationItemComponent(
             Column {
 
                 Text(
-                    text = quotation.date,
+                    text = "${quotation.date}  N.${quotation.quotationNumber}",
                     modifier = Modifier.padding(horizontal = 10.dp),
                     color = Color.Black,
                     fontWeight = FontWeight.Bold

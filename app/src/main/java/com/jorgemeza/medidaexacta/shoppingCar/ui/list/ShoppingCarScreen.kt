@@ -14,8 +14,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.jorgemeza.medidaexacta.R
 import com.jorgemeza.medidaexacta.core.ui.AlertDialogComponent
 import com.jorgemeza.medidaexacta.core.ui.CircularProgresIndicatorComponent
 import com.jorgemeza.medidaexacta.core.ui.FloatingActionButtonComponent
@@ -59,8 +61,8 @@ fun ShoppingCarScreen(
                 if (!state.idDetailDelete.isNullOrBlank()) {
                     AlertDialogComponent(
                         icon = Icons.Default.Warning,
-                        title = "Are you sure you want to delete the Product?",
-                        message = "Once deleted, you will not be able to recover the information.",
+                        title = stringResource(R.string.delete_product_alert_dialog),
+                        message = stringResource(R.string.delete_alert_dialog),
                         iconColor = com.jorgemeza.medidaexacta.ui.theme.Warning,
                         onDismiss = {
                             shoppingCarViewModel.onEvent(ShoppingCarEvent.OnDismissDialog)

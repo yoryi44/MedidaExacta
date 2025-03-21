@@ -47,7 +47,7 @@ class ShoppingCarDetailViewModel @Inject constructor(
                     val detail = DetailModel(
                         id = state.id ?: UUID.randomUUID().toString(),
                         amount = state.amount,
-                        price = state.price,
+                        price = state.price.replace(",","."),
                         quotation = state.quotation,
                         product = state.product,
                     )

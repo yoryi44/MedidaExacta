@@ -39,7 +39,10 @@ class QuotationRepositoryImpl(
 
         val apiFlow = getQuotationFormApi()
 
-        return localFlow.combine(apiFlow) { db, api -> db }
+        return localFlow.combine(apiFlow) { db, api ->
+            val sortedList = db.sortedBy { it.quotationNumber }
+            sortedList
+        }
     }
 
     override suspend fun getAllQuotationMain() : Boolean {
