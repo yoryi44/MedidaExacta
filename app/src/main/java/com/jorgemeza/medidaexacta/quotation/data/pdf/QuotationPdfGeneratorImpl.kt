@@ -28,6 +28,7 @@ import com.jorgemeza.medidaexacta.quotation.domain.pdf.IQuotationPdfGenerator
 import com.jorgemeza.medidaexacta.ui.theme.Danger
 import java.io.File
 import java.io.IOException
+import java.time.LocalDate
 
 class QuotationPdfGeneratorImpl(
     private val context: Context
@@ -258,7 +259,7 @@ class QuotationPdfGeneratorImpl(
                 """
         CLIENTE: ${client.name}
         DIRECCIÓN: ${client.address}
-        FECHA: ${quotation.date}
+        FECHA: ${LocalDate.now()}
         """.trimIndent()
             ).setMarginTop(10f).setFontSize(12f)
             document.add(clientInfo)
@@ -323,7 +324,7 @@ class QuotationPdfGeneratorImpl(
             if(!quotation.observation.isNullOrBlank())
             {
                 val observations =
-                    Paragraph("NOTE: ${quotation.observation}").setFontSize(10f)
+                    Paragraph("NOTE: ${quotation.observation}").setFontSize(10f).setBold()
                         .setMarginTop(20f)
                 document.add(observations)
             }
