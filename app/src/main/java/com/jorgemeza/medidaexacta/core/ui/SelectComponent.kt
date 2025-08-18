@@ -74,12 +74,12 @@ fun SelectComponent(
             options.forEach { selectionOption ->
                 HorizontalDivider(modifier = Modifier.height(2.dp))
                 DropdownMenuItem(
-                    text = { Text(selectionOption) },
+                    text = { Text(selectionOption, color = Color.Black) },
                     onClick = {
                         onSelected(selectionOption)
                         selectedItem = selectionOption
                         expanded = false
-                    }
+                    },
                 )
             }
         }

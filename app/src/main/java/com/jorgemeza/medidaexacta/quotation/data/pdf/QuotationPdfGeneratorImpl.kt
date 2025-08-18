@@ -37,14 +37,14 @@ class QuotationPdfGeneratorImpl(
     override suspend fun pdfGenerator(
         quotation: QuotationModel,
         client: ClientModel,
-        detail: List<DetailModel>
+        detail: List<DetailModel>,
     ) {
         try {
 
             var subtotal : Double = 0.0
             val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
 
-            val filePath = File(dir, "example.pdf")
+            val filePath = File(dir, "presupuesto_${quotation.quotationNumber}.pdf")
 
             val pdfWriter = PdfWriter(filePath)
             val pdfDocument = PdfDocument(pdfWriter)
@@ -221,7 +221,7 @@ class QuotationPdfGeneratorImpl(
             var subtotal : Double = 0.0
             val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
 
-            val filePath = File(dir, "example.pdf")
+            val filePath = File(dir, "nota_cobro_${quotation.quotationNumber}.pdf")
 
             val pdfWriter = PdfWriter(filePath)
             val pdfDocument = PdfDocument(pdfWriter)

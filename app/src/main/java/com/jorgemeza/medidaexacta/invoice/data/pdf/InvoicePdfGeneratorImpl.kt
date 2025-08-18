@@ -43,7 +43,7 @@ class InvoicePdfGeneratorImpl(
             var iva : Double = 0.0
             val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
 
-            val filePath = File(dir, "example.pdf")
+            val filePath = File(dir, "factura_$invoiceNumber.pdf")
 
             val pdfWriter = PdfWriter(filePath)
             val pdfDocument = PdfDocument(pdfWriter)
