@@ -69,7 +69,7 @@ class InvoicePdfGeneratorImpl(
             ).setFontSize(20f).setBold()
             document.add(title)
 
-            val legalRepresentative = Paragraph("David Alejandro Mora Márquez").setTextAlignment(
+            val legalRepresentative = Paragraph("Cristian Camilo Vanegas Beltrán").setTextAlignment(
                 TextAlignment.LEFT
             ).setFontSize(20f).setBold()
             document.add(legalRepresentative)
@@ -77,9 +77,9 @@ class InvoicePdfGeneratorImpl(
             val LegalRepresentativeInfo = Paragraph(
             """
                 ${LocalDate.now()} 
-                C/Almonte 16, Portal D, bajo B
-                Madrid - 28031
-                Cif: Z0102622R
+                Camino Viejo de Leganes 45 P03 IZ
+                Madrid - 28019
+                Cif: Y9754076C
                 """.trimIndent()
             ).setFontSize(12f).setTextAlignment(
                 TextAlignment.LEFT
@@ -170,7 +170,7 @@ class InvoicePdfGeneratorImpl(
             val paymentInfo = Paragraph(
                 """
                 FORMA PAGO:
-                Transferencia bancaria al número de cuenta: ES9700810473470001759278
+                Transferencia bancaria al número de cuenta: ES3400493125702414307535
                 """.trimIndent()
             ).setMarginTop(10f).setFontSize(12f).setBold()
 
