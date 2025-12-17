@@ -77,8 +77,8 @@ class InvoicePdfGeneratorImpl(
             val LegalRepresentativeInfo = Paragraph(
             """
                 ${LocalDate.now()} 
-                Camino Viejo de Leganes 45 P03 IZ
-                Madrid - 28019
+                Calle Bario 17-6a
+                Madrid - 28021
                 Cif: Y9754076C
                 """.trimIndent()
             ).setFontSize(12f).setTextAlignment(
